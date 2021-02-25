@@ -11,7 +11,7 @@ public:
 	virtual void CollidesWall();
 
 protected:
-	Character();
+	Character(const std::string& filePath);
 	sf::Texture m_Texture;
 	sf::Sprite m_Sprite;
 

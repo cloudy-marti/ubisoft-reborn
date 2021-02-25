@@ -4,7 +4,7 @@
 GameDemo::GameDemo()
     : Game{ "Game Demo" }
     , m_Door{ 900, 600, 100, 200 }
-    , m_MainCharacter{}
+    , m_MainCharacter{ ".\\Assets\\red_ball.bmp" }
     , m_Camera{ m_Window.getDefaultView() }
     , m_IsFinished{ false }
 {

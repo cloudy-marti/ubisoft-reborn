@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "Character.h"
 
-Character::Character()
+Character::Character(const std::string& filePath)
     : m_Position(250.0f, 250.0f)
     , m_isCollidingWall(false)
 {
-    m_Texture.loadFromFile(".\\Assets\\red_ball.bmp");
+    m_Texture.loadFromFile(filePath);
 
     const sf::Vector2f size(static_cast<float>(m_Texture.getSize().x), static_cast<float>(m_Texture.getSize().y));
 

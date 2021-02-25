@@ -1,4 +1,6 @@
 #include <stdafx.h>
+#include <string>
+
 #include <Game/MainCharacter.h>
 
 using namespace sf;
@@ -31,27 +33,13 @@ namespace
 }
 
 
-MainCharacter::MainCharacter()
-    : Character {}
+MainCharacter::MainCharacter(const std::string& filePath)
+    : Character { filePath }
     , m_IsPlayingEndGame(false)
-    //, m_Position(250.0f, 250.0f)
     , m_IsUsingJoystick(false)
     , m_JoystickIndex(0)
     , m_WasButtonPressed(false)
-    //, m_isCollidingWall(false)
 {
-    /*
-    m_Texture.loadFromFile(".\\Assets\\red_ball.bmp");
-
-    const sf::Vector2f size(static_cast<float>(m_Texture.getSize().x), static_cast<float>(m_Texture.getSize().y));
-
-    m_Sprite.setTexture(m_Texture);
-    m_Sprite.setOrigin(size * 0.5f);
-    m_Sprite.setPosition(m_Position);
-
-    SetBoundingBox(m_Position, size);
-    */
-
     m_IsUsingJoystick = GetFirstJoystickIndex(m_JoystickIndex);
 }
 
@@ -151,19 +139,6 @@ void MainCharacter::Update(float deltaTime)
     m_Sprite.setPosition(m_Position);
     SetCenter(m_Position);
 }
-
-
-/*
-void MainCharacter::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    target.draw(m_Sprite);
-}
-
-void MainCharacter::CollidesWall()
-{
-    m_isCollidingWall = true;
-}
-*/
 
 void MainCharacter::StartEndGame()
 {
