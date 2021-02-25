@@ -82,6 +82,12 @@ void GameDemo::Render(sf::RenderTarget& target)
     target.clear(sf::Color(0, 0, 0));
     target.draw(m_Door);
     target.draw(m_MainCharacter);
+    //target.draw(m_Wall);
+
+    for(Wall* w : m_Walls)
+    {
+        target.draw(*w);
+    }
 
     if (m_IsFinished)
     {
@@ -136,3 +142,9 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
 
     ImGui::End();
 }
+
+void GameDemo::addWall(float xCenterPos, float yCenterPos, float width, float height)
+{
+    m_Walls.emplace_back(new Wall{ xCenterPos, yCenterPos, width, height });
+}
+

@@ -128,16 +128,34 @@ void MainCharacter::Update(float deltaTime)
         }
     }
 
-    m_Position += m_Velocity * deltaTime;
+    if (m_isCollidingWall)
+    {
+        m_Position -= m_Velocity * deltaTime;
+        m_Velocity.x = 0;
+        m_Velocity.y = 0;
+        m_isCollidingWall = false;
+    }
+    else
+    {
+        m_Position += m_Velocity * deltaTime;
+    }
+
     m_Sprite.setPosition(m_Position);
     SetCenter(m_Position);
 }
 
 
+/*
 void MainCharacter::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_Sprite);
 }
+
+void MainCharacter::CollidesWall()
+{
+    m_isCollidingWall = true;
+}
+*/
 
 void MainCharacter::StartEndGame()
 {
