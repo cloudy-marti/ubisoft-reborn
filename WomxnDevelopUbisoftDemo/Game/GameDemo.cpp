@@ -5,6 +5,7 @@ GameDemo::GameDemo()
     : Game{ "Game Demo" }
     , m_Door{ 900, 600, 100, 200 }
     , m_MainCharacter{}
+    , m_Camera{ m_Window.getDefaultView() }
     , m_IsFinished{ false }
 {
     m_EndgameTextFont.loadFromFile("Assets\\arial.ttf");
@@ -18,11 +19,47 @@ GameDemo::GameDemo()
     m_EndgameSoundBuffer.loadFromFile("Assets\\Test.wav");
 
     m_EndgameSound.setBuffer(m_EndgameSoundBuffer);
+
+    m_Window.setView(m_Camera);
 }
+
+GameDemo::~GameDemo()
+{
+    for (Wall* w : m_Walls)
+    {
+        delete w;
+    }
+}
+
+#include <iostream>
 
 void GameDemo::Update(float deltaTime)
 {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
+    {
+        std::cout << "zoom in" << std::endl;
+        m_Camera.zoom(0.9f);
+        m_Window.setView(m_Camera);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract))
+    {
+        std::cout << "zoom out" << std::endl;
+        m_Camera.zoom(1.1f);
+        m_Window.setView(m_Camera);
+    }
+
+    for (Wall* w : m_Walls)
+    {
+        if (w->IsColliding(m_MainCharacter))
+        {
+            m_MainCharacter.CollidesWall();
+        }
+    }
+
     m_MainCharacter.Update(deltaTime);
+    m_Camera.setCenter(m_MainCharacter.GetCenter());
+    m_Window.setView(m_Camera);
+
     m_Door.Update(deltaTime);
 
     if (!m_IsFinished)
@@ -64,6 +101,25 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
 
         ImGui::Text("X: %f", mainCharCenterPos.x);
         ImGui::Text("Y: %f", mainCharCenterPos.y);
+    }
+
+    if (ImGui::CollapsingHeader("2D Camera status"))
+    {
+        const auto& cameraCenterPos = m_Camera.getCenter();
+        const auto& windowViewCenterPos = m_Window.getView().getCenter();
+        const auto& windowDefaultViewCenterPos = m_Window.getDefaultView().getCenter();
+
+        ImGui::Text("Camera");
+        ImGui::Text("X: %f", cameraCenterPos.x);
+        ImGui::Text("Y: %f\n", cameraCenterPos.y);
+
+        ImGui::Text("Current View");
+        ImGui::Text("X: %f", windowViewCenterPos.x);
+        ImGui::Text("Y: %f\n", windowViewCenterPos.y);
+
+        ImGui::Text("Default View");
+        ImGui::Text("X: %f", windowDefaultViewCenterPos.x);
+        ImGui::Text("Y: %f\n", windowDefaultViewCenterPos.y);
     }
 
     if (ImGui::CollapsingHeader("Game status"))

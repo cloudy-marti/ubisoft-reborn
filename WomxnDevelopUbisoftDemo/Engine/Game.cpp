@@ -35,29 +35,28 @@ void Game::RunGameLoop()
         {
             switch (event.type)
             {
-            case sf::Event::Closed:
-            {
-                m_Window.close();
-                break;
-            }
-            case sf::Event::KeyPressed:
-            {
-                if (event.key.code == sf::Keyboard::Escape)
+                case sf::Event::Closed:
                 {
                     m_Window.close();
+                    break;
                 }
-                else if (event.key.code == sf::Keyboard::F1)
+                case sf::Event::KeyPressed:
                 {
-                    toggleImGui = !toggleImGui;
+                    if (event.key.code == sf::Keyboard::Escape)
+                    {
+                        m_Window.close();
+                    }
+                    else if (event.key.code == sf::Keyboard::F1)
+                    {
+                        toggleImGui = !toggleImGui;
+                    }
+                    break;
                 }
-                break;
+                case sf::Event::Resized:
+                {
+                    break;
+                }
             }
-            case sf::Event::Resized:
-            {
-                break;
-            }
-            }
-
             ImGui::SFML::ProcessEvent(event);
         }
 
