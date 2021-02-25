@@ -32,8 +32,15 @@ namespace
 
 
 MainCharacter::MainCharacter()
-    : m_IsPlayingEndGame(false), m_Position(250.0f, 250.0f), m_IsUsingJoystick(false), m_JoystickIndex(0), m_WasButtonPressed(false)
+    : Character {}
+    , m_IsPlayingEndGame(false)
+    //, m_Position(250.0f, 250.0f)
+    , m_IsUsingJoystick(false)
+    , m_JoystickIndex(0)
+    , m_WasButtonPressed(false)
+    //, m_isCollidingWall(false)
 {
+    /*
     m_Texture.loadFromFile(".\\Assets\\red_ball.bmp");
 
     const sf::Vector2f size(static_cast<float>(m_Texture.getSize().x), static_cast<float>(m_Texture.getSize().y));
@@ -43,6 +50,7 @@ MainCharacter::MainCharacter()
     m_Sprite.setPosition(m_Position);
 
     SetBoundingBox(m_Position, size);
+    */
 
     m_IsUsingJoystick = GetFirstJoystickIndex(m_JoystickIndex);
 }
