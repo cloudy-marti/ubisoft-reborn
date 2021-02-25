@@ -35,6 +35,15 @@
     <ClCompile Include="Engine\Collision.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Wall.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PhysicsEngine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -62,6 +71,15 @@
     <ClInclude Include="Engine\Collision.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PhysicsEngine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -72,6 +90,9 @@
     </Filter>
     <Filter Include="Engine\ImGui">
       <UniqueIdentifier>{f630cd3c-1cea-471c-9a95-a35b86a8dd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Reborn">
+      <UniqueIdentifier>{1910afc9-2a43-41cb-8dde-9c0d74cc8a44}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

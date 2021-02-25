@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WomxnDevelopUbisoftDemo", "WomxnDevelopUbisoftDemo\WomxnDevelopUbisoftDemo.vcxproj", "{B3A9349D-CA00-42CC-848E-7FE1C41A9D8D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9205A65C-605A-4DA7-9DF9-31C22ED98E70}"
+	ProjectSection(SolutionItems) = preProject
+		WomxnDevelopUbisoftDemo\Game\Wall.cpp = WomxnDevelopUbisoftDemo\Game\Wall.cpp
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
