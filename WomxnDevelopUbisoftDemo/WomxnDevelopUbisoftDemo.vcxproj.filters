@@ -50,7 +50,12 @@
     <ClCompile Include="Game\Character\MainCharacter.cpp">
       <Filter>Game\Character</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Engine\Camera.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\InputManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -93,7 +98,12 @@
     <ClInclude Include="Game\Character\MainCharacter.h">
       <Filter>Game\Character</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Engine\Camera.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\InputManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
