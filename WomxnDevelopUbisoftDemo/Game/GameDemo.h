@@ -7,6 +7,7 @@
 #include <Game/Character/MainCharacter.h>
 #include <Game/Character/Companion.h>
 #include <Game/Wall.h>
+#include <Engine/Camera.h>
 
 class GameDemo : public Game
 {
@@ -37,7 +38,7 @@ private:
 
     std::vector<Character*> m_Enemies;
 
-    sf::View m_Camera;
+    Camera m_MainCamera;
 
     bool m_IsFinished;
 };

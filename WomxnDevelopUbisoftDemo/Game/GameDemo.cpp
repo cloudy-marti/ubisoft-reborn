@@ -6,7 +6,7 @@ GameDemo::GameDemo()
     , m_Door{ 900, 600, 100, 200 }
     , m_MainCharacter{ ".\\Assets\\red_ball.bmp" }
     , m_Companion{ m_MainCharacter, ".\\Assets\\blue_ball.bmp" }
-    , m_Camera{ m_Window.getDefaultView() }
+    , m_MainCamera{ m_Window.getDefaultView() }
     , m_IsFinished{ false }
 {
     m_EndgameTextFont.loadFromFile("Assets\\arial.ttf");
@@ -21,7 +21,7 @@ GameDemo::GameDemo()
 
     m_EndgameSound.setBuffer(m_EndgameSoundBuffer);
 
-    m_Window.setView(m_Camera);
+    m_Window.setView(m_MainCamera.getView());
 }
 
 GameDemo::~GameDemo()
@@ -41,14 +41,14 @@ void GameDemo::Update(float deltaTime)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
     {
         std::cout << "zoom in" << std::endl;
-        m_Camera.zoom(0.9f);
-        m_Window.setView(m_Camera);
+        m_MainCamera.zoom(0.9f);
+        m_Window.setView(m_MainCamera.getView());
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract))
     {
         std::cout << "zoom out" << std::endl;
-        m_Camera.zoom(1.1f);
-        m_Window.setView(m_Camera);
+        m_MainCamera.zoom(1.1f);
+        m_Window.setView(m_MainCamera.getView());
 
         if (m_Companion.IsNearLeader())
         {
@@ -73,8 +73,8 @@ void GameDemo::Update(float deltaTime)
 
     // update camera following the main character
     
-    m_Camera.setCenter(m_MainCharacter.GetCenter());
-    m_Window.setView(m_Camera);
+    m_MainCamera.setCenter(m_MainCharacter.GetCenter());
+    m_Window.setView(m_MainCamera.getView());
 
     m_Door.Update(deltaTime);
 
@@ -137,7 +137,7 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
 
     if (ImGui::CollapsingHeader("2D Camera status"))
     {
-        const auto& cameraCenterPos = m_Camera.getCenter();
+        const auto& cameraCenterPos = m_MainCamera.getCenter();
         const auto& windowViewCenterPos = m_Window.getView().getCenter();
         const auto& windowDefaultViewCenterPos = m_Window.getDefaultView().getCenter();
 
