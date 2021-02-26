@@ -2,6 +2,8 @@
 
 #include <Game/GameDemo.h>
 
+#include <Game/Character/Companion.h>
+
 #include <iostream>
 
 int main()
@@ -12,7 +14,7 @@ int main()
     std::cout << "wall added" << std::endl;
 
     sf::Music music;
-    if (music.openFromFile("Assets/pallet_town.wav"))
+    if (music.openFromFile("Assets/sound/pallet_town.wav"))
     {
         music.setVolume(5.f);
         //music.setLoop(true);

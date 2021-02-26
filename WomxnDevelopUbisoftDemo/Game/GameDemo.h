@@ -4,7 +4,8 @@
 
 #include <Engine/Game.h>
 #include <Game/Door.h>
-#include <Game/MainCharacter.h>
+#include <Game/Character/MainCharacter.h>
+#include <Game/Character/Companion.h>
 #include <Game/Wall.h>
 
 class GameDemo : public Game
@@ -18,6 +19,7 @@ public:
     void Render(sf::RenderTarget& target) override;
     void RenderDebugMenu(sf::RenderTarget& target) override;
 
+    void addAnNPC(Character*);
     void addWall(float xCenterPos, float yCenterPos, float width, float height);
 
 private:
@@ -31,6 +33,10 @@ private:
     std::vector<Wall*> m_Walls;
 
     MainCharacter m_MainCharacter;
+    Companion m_Companion;
+
+    std::vector<Character*> m_Enemies;
+
     sf::View m_Camera;
 
     bool m_IsFinished;

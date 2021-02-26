@@ -2,9 +2,10 @@
 #include "GameDemo.h"
 
 GameDemo::GameDemo()
-    : Game{ "Game Demo" }
+    : Game{ "Reborn" }
     , m_Door{ 900, 600, 100, 200 }
     , m_MainCharacter{ ".\\Assets\\red_ball.bmp" }
+    , m_Companion{ m_MainCharacter, ".\\Assets\\blue_ball.bmp" }
     , m_Camera{ m_Window.getDefaultView() }
     , m_IsFinished{ false }
 {
@@ -16,7 +17,7 @@ GameDemo::GameDemo()
     m_EndgameText.setCharacterSize(24);
     m_EndgameText.setFillColor(sf::Color::Red);
 
-    m_EndgameSoundBuffer.loadFromFile("Assets\\Test.wav");
+    m_EndgameSoundBuffer.loadFromFile("Assets\\sound\\Test.wav");
 
     m_EndgameSound.setBuffer(m_EndgameSoundBuffer);
 
@@ -46,8 +47,14 @@ void GameDemo::Update(float deltaTime)
         std::cout << "zoom out" << std::endl;
         m_Camera.zoom(1.1f);
         m_Window.setView(m_Camera);
+
+        if (m_Companion.IsNearLeader())
+        {
+            m_Companion.AttachToLeader();
+        }
     }
 
+    // check collision with walls / non traversable map
     for (Wall* w : m_Walls)
     {
         if (w->IsColliding(m_MainCharacter))
@@ -56,7 +63,14 @@ void GameDemo::Update(float deltaTime)
         }
     }
 
+    // check collision or proximity with a companion
+
+    // update characters position
     m_MainCharacter.Update(deltaTime);
+    m_Companion.Update(deltaTime);
+
+    // update camera following the main character
+    
     m_Camera.setCenter(m_MainCharacter.GetCenter());
     m_Window.setView(m_Camera);
 
@@ -82,7 +96,7 @@ void GameDemo::Render(sf::RenderTarget& target)
     target.clear(sf::Color(0, 0, 0));
     target.draw(m_Door);
     target.draw(m_MainCharacter);
-    //target.draw(m_Wall);
+    target.draw(m_Companion);
 
     for(Wall* w : m_Walls)
     {
@@ -107,6 +121,16 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
 
         ImGui::Text("X: %f", mainCharCenterPos.x);
         ImGui::Text("Y: %f", mainCharCenterPos.y);
+    }
+
+    if (ImGui::CollapsingHeader("Companion status"))
+    {
+        const auto& charCenterPos = m_Companion.GetCenter();
+
+        ImGui::Text("X: %f", charCenterPos.x);
+        ImGui::Text("Y: %f", charCenterPos.y);
+
+        ImGui::Text("Attached: %s", m_Companion.IsAttached() ? "yes" : "no");
     }
 
     if (ImGui::CollapsingHeader("2D Camera status"))
@@ -141,6 +165,11 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
     }
 
     ImGui::End();
+}
+
+void GameDemo::addAnNPC(Character* npc)
+{
+    m_Enemies.push_back(npc);
 }
 
 void GameDemo::addWall(float xCenterPos, float yCenterPos, float width, float height)

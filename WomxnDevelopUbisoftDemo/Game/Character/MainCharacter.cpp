@@ -1,7 +1,6 @@
 #include <stdafx.h>
-#include <string>
 
-#include <Game/MainCharacter.h>
+#include "MainCharacter.h"
 
 using namespace sf;
 
@@ -34,11 +33,11 @@ namespace
 
 
 MainCharacter::MainCharacter(const std::string& filePath)
-    : Character { 3, filePath }
-    , m_IsPlayingEndGame(false)
-    , m_IsUsingJoystick(false)
-    , m_JoystickIndex(0)
-    , m_WasButtonPressed(false)
+    : Character{ { 250.f, 250.f }, 3, filePath }
+    , m_IsPlayingEndGame    { false }
+    , m_IsUsingJoystick     { false }
+    , m_JoystickIndex       { 0 }
+    , m_WasButtonPressed    { false }
 {
     m_IsUsingJoystick = GetFirstJoystickIndex(m_JoystickIndex);
 }

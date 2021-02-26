@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "Character.h"
 
-Character::Character(const int hp, const std::string& filePath)
-    : m_Position(250.0f, 250.0f)
-    , m_isCollidingWall(false)
-    , m_HealthPoints(hp)
+Character::Character(sf::Vector2f position, int hp, const std::string& filePath)
+    : m_Position        { position }
+    , m_isCollidingWall { false }
+    , m_HealthPoints    { hp }
 {
     m_Texture.loadFromFile(filePath);
 

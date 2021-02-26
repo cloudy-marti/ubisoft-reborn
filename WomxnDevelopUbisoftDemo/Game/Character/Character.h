@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 class Character : public sf::Drawable, public BoxCollideable
 {
 public:
@@ -11,7 +13,8 @@ public:
 	virtual void CollidesWall();
 
 protected:
-	Character(const int, const std::string&);
+	Character(sf::Vector2f, int, const std::string&);
+
 	sf::Texture m_Texture;
 	sf::Sprite m_Sprite;
 
