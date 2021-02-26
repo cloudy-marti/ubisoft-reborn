@@ -34,7 +34,7 @@ namespace
 
 
 MainCharacter::MainCharacter(const std::string& filePath)
-    : Character { filePath }
+    : Character { 3, filePath }
     , m_IsPlayingEndGame(false)
     , m_IsUsingJoystick(false)
     , m_JoystickIndex(0)

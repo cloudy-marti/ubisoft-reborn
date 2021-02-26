@@ -11,7 +11,7 @@ public:
 	virtual void CollidesWall();
 
 protected:
-	Character(const std::string& filePath);
+	Character(const int, const std::string&);
 	sf::Texture m_Texture;
 	sf::Sprite m_Sprite;
 
@@ -20,6 +20,7 @@ protected:
 
 	bool m_isCollidingWall;
 
+	int m_HealthPoints;
+
 private:
 };
-

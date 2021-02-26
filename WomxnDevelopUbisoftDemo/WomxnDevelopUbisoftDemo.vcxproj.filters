@@ -41,7 +41,10 @@
     <ClCompile Include="Engine\PhysicsEngine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
+    <ClCompile Include="Game\Character.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Collectible.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,13 +74,16 @@
     <ClInclude Include="Engine\Collision.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\PhysicsEngine.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Character.h">
+    <ClInclude Include="Game\Character.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Collectible.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Wall.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
