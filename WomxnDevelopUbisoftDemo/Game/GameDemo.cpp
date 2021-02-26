@@ -36,6 +36,8 @@ GameDemo::~GameDemo()
 
 void GameDemo::Update(float deltaTime)
 {
+    m_InputManager->Update();
+
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
     {
         std::cout << "zoom in" << std::endl;

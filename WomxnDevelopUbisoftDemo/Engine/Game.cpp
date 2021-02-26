@@ -12,6 +12,8 @@ Game::Game(const char* windowTitle)
     m_Window.setFramerateLimit(static_cast<uint32_t>(APP_MAX_FRAMERATE));
     m_Window.setActive();
     ImGui::SFML::Init(m_Window);
+
+    m_InputManager = InputManager::GetInstance();
 }
 
 Game::~Game()

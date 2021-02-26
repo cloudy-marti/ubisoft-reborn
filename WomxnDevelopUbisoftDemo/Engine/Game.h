@@ -1,5 +1,7 @@
 #pragma once
 
+#include <InputManager.h>
+
 class Game
 {
 public:
@@ -14,6 +16,8 @@ protected:
     virtual void RenderDebugMenu(sf::RenderTarget& target) = 0;
 
     sf::RenderWindow m_Window;
+
+    InputManager* m_InputManager;
 
 private:
 };
