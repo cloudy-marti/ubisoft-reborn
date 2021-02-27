@@ -37,9 +37,16 @@ MainCharacter::MainCharacter(const std::string& filePath)
     , m_IsPlayingEndGame    { false }
     , m_IsUsingJoystick     { false }
     , m_JoystickIndex       { 0 }
+    , m_IsOnSlipperyFloor   { false }
     , m_WasButtonPressed    { false }
 {
     m_IsUsingJoystick = GetFirstJoystickIndex(m_JoystickIndex);
+
+    InputManager* inputManager = InputManager::GetInstance();
+    inputManager->BindKey(Keyboard::Right, *this, &MainCharacter::GoRight);
+    inputManager->BindKey(Keyboard::Left, *this, &MainCharacter::GoLeft);
+    inputManager->BindKey(Keyboard::Up, *this, &MainCharacter::GoUp);
+    inputManager->BindKey(Keyboard::Down, *this, &MainCharacter::GoDown);
 }
 
 
@@ -49,11 +56,6 @@ void MainCharacter::Update(float deltaTime)
     {
         return;
     }
-
-    const float SPEED_MAX = 150.0f;
-    const float SPEED_INC = 10.0f;
-    const float DEAD_ZONE = 5.0f;
-    const float SLOWDOWN_RATE = 0.9f;
 
     if (m_IsUsingJoystick)
     {
@@ -77,51 +79,12 @@ void MainCharacter::Update(float deltaTime)
             }
         }
     }
-    else
+
+    m_Velocity.x *= SLOWDOWN_RATE;
+    m_Velocity.y *= SLOWDOWN_RATE;
+    /*if (m_IsOnSlipperyFloor)
     {
-        if (Keyboard::isKeyPressed(Keyboard::Right))
-        {
-            m_Velocity.x = fmin(m_Velocity.x + SPEED_INC, SPEED_MAX);
-        }
-        else if (Keyboard::isKeyPressed(Keyboard::Left))
-        {
-            m_Velocity.x = fmax(m_Velocity.x - SPEED_INC, -SPEED_MAX);
-        }
-        else
-        {
-            m_Velocity.x *= SLOWDOWN_RATE;
-        }
-
-        if (Keyboard::isKeyPressed(Keyboard::Down))
-        {
-            m_Velocity.y = fmin(m_Velocity.y + SPEED_INC, SPEED_MAX);
-        }
-        else if (Keyboard::isKeyPressed(Keyboard::Up))
-        {
-            m_Velocity.y = fmax(m_Velocity.y - SPEED_INC, -SPEED_MAX);
-        }
-        else
-        {
-            m_Velocity.y *= SLOWDOWN_RATE;
-        }
-
-        if (Keyboard::isKeyPressed(Keyboard::Space))
-        {
-            if (!m_WasButtonPressed)
-            {
-                m_Sprite.setScale(0.8f, 0.8f);
-                m_WasButtonPressed = true;
-            }
-        }
-        else
-        {
-            if (m_WasButtonPressed)
-            {
-                m_Sprite.setScale(1.0f, 1.0f);
-                m_WasButtonPressed = false;
-            }
-        }
-    }
+    }*/
 
     if (m_isCollidingWall)
     {
@@ -137,9 +100,60 @@ void MainCharacter::Update(float deltaTime)
 
     m_Sprite.setPosition(m_Position);
     SetCenter(m_Position);
+    m_Velocity = { 0.f, 0.f };
 }
 
 void MainCharacter::StartEndGame()
 {
     m_IsPlayingEndGame = true;
+}
+
+// Use SPEED_MAX only if you want "just walking"
+// Uncomment SlowDown rate on Update function if you need a smoother walking speed
+inline void MainCharacter::GoRight()
+{
+    if (!m_IsOnSlipperyFloor)
+    {
+        m_Velocity.x = SPEED_MAX;
+    }
+    else
+    {
+        m_Velocity.x = fmin(m_Velocity.x + SPEED_INC, SPEED_MAX);
+    }
+}
+
+inline void MainCharacter::GoLeft()
+{
+    if (!m_IsOnSlipperyFloor)
+    {
+        m_Velocity.x = -SPEED_MAX;
+    }
+    else
+    {
+        m_Velocity.x = fmax(m_Velocity.x - SPEED_INC, -SPEED_MAX);
+    }
+}
+
+inline void MainCharacter::GoDown()
+{
+    if (!m_IsOnSlipperyFloor)
+    {
+        m_Velocity.y = SPEED_MAX;
+    }
+    else
+    {
+        m_Velocity.y = fmin(m_Velocity.y + SPEED_INC, SPEED_MAX);
+    }
+}
+
+inline void MainCharacter::GoUp()
+{
+    if (!m_IsOnSlipperyFloor)
+    {
+        m_Velocity.y = -SPEED_MAX;
+    }
+    else
+    {
+        m_Velocity.y = fmax(m_Velocity.y - SPEED_INC, -SPEED_MAX);
+    }
 }

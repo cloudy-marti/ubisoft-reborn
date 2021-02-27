@@ -16,12 +16,8 @@ InputManager* InputManager::GetInstance()
     return _Instance;
 }
 
-void InputManager::BindKey(sf::Keyboard::Key key, InputCallback callback)
-{
-    m_keyBindings[key] = callback;
-}
 
-bool InputManager::RemoveKey(sf::Keyboard::Key key)
+bool InputManager::RemoveKey(const sf::Keyboard::Key& key)
 {
     if (m_keyBindings.find(key) != m_keyBindings.end())
     {

@@ -38,24 +38,6 @@ void GameDemo::Update(float deltaTime)
 {
     m_InputManager->Update();
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
-    {
-        std::cout << "zoom in" << std::endl;
-        m_MainCamera.zoom(0.9f);
-        m_Window.setView(m_MainCamera.getView());
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract))
-    {
-        std::cout << "zoom out" << std::endl;
-        m_MainCamera.zoom(1.1f);
-        m_Window.setView(m_MainCamera.getView());
-
-        if (m_Companion.IsNearLeader())
-        {
-            m_Companion.AttachToLeader();
-        }
-    }
-
     // check collision with walls / non traversable map
     for (Wall* w : m_Walls)
     {

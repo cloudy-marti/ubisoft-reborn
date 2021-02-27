@@ -9,6 +9,8 @@ Companion::Companion(const Character& leader, const std::string& filePath)
 	, m_IsAttachedToLeader	{ false }
 	, m_Distance			{ m_BoundingBox.width }
 {
+	InputManager* inputManager = InputManager::GetInstance();
+	inputManager->BindKey(sf::Keyboard::Enter, *this, &Companion::AttachToLeader);
 }
 
 #include <iostream>
