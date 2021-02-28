@@ -22,9 +22,11 @@ public:
     void RenderDebugMenu(sf::RenderTarget& target) override;
 
     void addAnNPC(Character*);
-    void addWall(float xCenterPos, float yCenterPos, float width, float height);
+
+    //void addWall(float xCenterPos, float yCenterPos, float width, float height);
 
 private:
+
     sf::Font m_EndgameTextFont;
     sf::Text m_EndgameText;
 
@@ -32,7 +34,9 @@ private:
     sf::Sound m_EndgameSound;
 
     Door m_Door;
-    std::vector<Wall*> m_Walls;
+    /*std::vector<Wall*> m_Walls;*/
+
+    TileMap m_Map;
 
     MainCharacter m_MainCharacter;
     Companion m_Companion;
