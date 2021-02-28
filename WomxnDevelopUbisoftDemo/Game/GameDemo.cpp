@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "GameDemo.h"
 
 GameDemo::GameDemo()
     : Game{ "Reborn" }

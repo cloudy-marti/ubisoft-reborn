@@ -219,6 +219,7 @@ xcopy /y /d  "$(SolutionDir)external\SFML-2.5.1\bin\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Game\Door.cpp" />
     <ClCompile Include="Game\GameDemo.cpp" />
     <ClCompile Include="Game\Wall.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +238,7 @@ xcopy /y /d  "$(SolutionDir)external\SFML-2.5.1\bin\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Game\Door.h" />
     <ClInclude Include="Game\GameDemo.h" />
     <ClInclude Include="Game\Wall.h" />
+    <ClInclude Include="TileMap.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

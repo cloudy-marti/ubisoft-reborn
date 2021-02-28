@@ -1,7 +1,5 @@
 #include <stdafx.h>
 
-#include "MainCharacter.h"
-
 using namespace sf;
 
 // Joystick helpers

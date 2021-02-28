@@ -1,8 +1,6 @@
 #include <stdafx.h>
 #include <string>
 
-#include "Companion.h"
-
 Companion::Companion(const Character& leader, const std::string& filePath)
 	: Character{ { 800.f, 250.f }, 3,  filePath }
 	, m_Leader				{ leader }

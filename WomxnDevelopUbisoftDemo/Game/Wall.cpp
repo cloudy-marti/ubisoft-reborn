@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Wall.h"
 
 Wall::Wall(float xCenterPos, float yCenterPos, float width, float height)
 	: m_rColor{ 0.8f }

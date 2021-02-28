@@ -35,9 +35,6 @@
     <ClCompile Include="Game\Wall.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PhysicsEngine.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Collectible.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -54,6 +51,12 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Engine\InputManager.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PhysicsEngine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -102,6 +105,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\InputManager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

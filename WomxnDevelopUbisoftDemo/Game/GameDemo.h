@@ -8,6 +8,7 @@
 #include <Game/Character/Companion.h>
 #include <Game/Wall.h>
 #include <Engine/Camera.h>
+#include <TileMap.h>
 
 class GameDemo : public Game
 {
