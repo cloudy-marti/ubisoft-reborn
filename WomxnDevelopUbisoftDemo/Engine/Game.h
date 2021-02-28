@@ -19,6 +19,7 @@ protected:
     sf::RenderWindow m_Window;
 
     InputManager* m_InputManager;
+    PhysicsEngine* m_PhysicsManager;
 
 private:
 };

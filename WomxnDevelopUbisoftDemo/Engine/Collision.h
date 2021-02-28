@@ -1,9 +1,49 @@
 #pragma once
 
+template<class T>
+using onCollisionCallback = void(T::*)(const BoxCollideable&);
+
 class BoxCollideable
 {
+public:
+    enum class Tag
+    {
+        DEFAULT,
+        PLAYER,
+        COMPANION,
+        ENEMY,
+        CHECKPOINT,
+        WALL,
+        HOLE
+    };
 
 public:
+    BoxCollideable()
+        : m_Tag { Tag::DEFAULT }
+    {
+        PhysicsEngine::GetInstance()->RegisterCollider(this);
+    }
+
+    BoxCollideable(Tag tag)
+        : m_Tag{ tag }
+    {
+        PhysicsEngine::GetInstance()->RegisterCollider(this);
+    }
+
+    BoxCollideable(const BoxCollideable& other)
+        : m_Tag{ other.m_Tag }
+        , m_OnCollisionFunc{ other.m_OnCollisionFunc }
+    {
+        PhysicsEngine::GetInstance()->RegisterCollider(this);
+    }
+
+    template<class T>
+    inline void BindOnCollisionFunc(T& instance, onCollisionCallback<T> callBack)
+    {
+        m_OnCollisionFunc = std::bind(callBack, &instance, std::placeholders::_1);
+    }
+
+
     inline const sf::FloatRect& GetBoundingBox() const { return m_BoundingBox; }
 
     inline const bool IsColliding(const BoxCollideable& other) const 
@@ -23,14 +63,11 @@ public:
         return sf::Vector2f(m_BoundingBox.left + (m_BoundingBox.width / 2.0f), m_BoundingBox.top + (m_BoundingBox.height / 2.0f));
     }
 
-protected:
-    inline void SetBoundingBox(float left, float top, float width, float height)
-    {
-        m_BoundingBox.left = left;
-        m_BoundingBox.top = top;
-        m_BoundingBox.width = width;
-        m_BoundingBox.height = height;
-    }
+
+    inline const Tag getTag() const { return m_Tag; }
+    inline void setTag(Tag tag) { m_Tag = tag; }
+
+    inline void onCollision(const BoxCollideable& other) { m_OnCollisionFunc(other); }
 
     inline void SetBoundingBox(const sf::Vector2f& center, const sf::Vector2f& size)
     {
@@ -46,5 +83,20 @@ protected:
         m_BoundingBox.top = center.y - (m_BoundingBox.height / 2.0f);
     }
 
+    //inline void setTag(Tag tag) { m_Tag = tag; }
+
+protected:
+
+    inline void SetBoundingBox(float left, float top, float width, float height)
+    {
+        m_BoundingBox.left = left;
+        m_BoundingBox.top = top;
+        m_BoundingBox.width = width;
+        m_BoundingBox.height = height;
+    }
+
     sf::FloatRect m_BoundingBox;
+    Tag m_Tag;
+    //void(*m_OnCollisionFunc)(const BoxCollideable&);
+    std::function<void(const BoxCollideable&)> m_OnCollisionFunc;
 };

@@ -12,6 +12,7 @@ Game::Game(const char* windowTitle)
     ImGui::SFML::Init(m_Window);
 
     m_InputManager = InputManager::GetInstance();
+    m_PhysicsManager = PhysicsEngine::GetInstance();
 }
 
 Game::~Game()

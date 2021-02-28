@@ -6,10 +6,13 @@ Door::Door(float xCenterPos, float yCenterPos, float width, float height)
 	, m_rColor{ 0.0f }
 	, m_gColor{ 1.0f }
 	, m_bColor{ 1.0f }
+	, m_BoundingBox { BoxCollideable::Tag::CHECKPOINT }
 {
 	const auto center = sf::Vector2f(xCenterPos, yCenterPos);
 	const auto size = sf::Vector2f(width, height);
-	SetBoundingBox(center, size);
+
+	m_BoundingBox.SetBoundingBox(center, size);
+	m_BoundingBox.BindOnCollisionFunc(*this, &Door::onCollision);
 
 	m_Rectangle.setSize(size);
 	m_Rectangle.setOrigin(size * 0.5f);
@@ -51,4 +54,39 @@ void Door::StartEndGame()
 	m_rColor = 0.25f;
 	m_gColor = 0.5f;
 	m_bColor = 0.75f;
+}
+
+bool Door::IsEndGame() const
+{
+	return m_IsPlayingEndGame;
+}
+
+void Door::onCollision(const BoxCollideable& other)
+{
+	BoxCollideable::Tag tag = other.getTag();
+
+	switch (tag)
+	{
+	case BoxCollideable::Tag::PLAYER:
+	{
+		if (m_BoundingBox.Contains(other))
+		{
+			StartEndGame();
+			/*
+			m_EndgameSound.play();
+
+			m_MainCharacter.StartEndGame();
+			m_Door.StartEndGame();
+			m_IsFinished = true;
+			*/
+		}
+		break;
+	}
+	case BoxCollideable::Tag::COMPANION:
+	case BoxCollideable::Tag::ENEMY:
+	case BoxCollideable::Tag::CHECKPOINT:
+	case BoxCollideable::Tag::WALL:
+	default:
+		break;
+	}
 }

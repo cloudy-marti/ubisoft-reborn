@@ -9,9 +9,6 @@
 int main()
 {
     GameDemo game{};
-    game.addWall(100, 600, 100, 200);
-
-    std::cout << "wall added" << std::endl;
 
     sf::Music music;
     if (music.openFromFile("Assets/sound/pallet_town.wav"))

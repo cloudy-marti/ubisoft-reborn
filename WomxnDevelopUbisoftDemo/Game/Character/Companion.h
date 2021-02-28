@@ -8,8 +8,9 @@ public:
 	bool IsNearLeader() const;
 
 	bool IsAttached() const;
-	void AttachToLeader();
-	void CollidesLeader(float) const;
+	void ToggleLeaderAttachment();
+
+	void onCollision(const BoxCollideable&) override;
 
 protected:
 private:
@@ -18,5 +19,6 @@ private:
 
 	float m_Distance;
 
-	void DetachFromLeader();
+	sf::SoundBuffer m_WoofSoundBuffer;
+	sf::Sound m_WoofSound;
 };

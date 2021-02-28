@@ -68,41 +68,27 @@ GameDemo::~GameDemo()
 void GameDemo::Update(float deltaTime)
 {
     m_InputManager->Update();
-
-    // check collision with walls / non traversable map
-    for (Wall* w : m_Walls)
-    {
-        if (w->IsColliding(m_MainCharacter))
-        {
-            m_MainCharacter.CollidesWall();
-        }
-    }
-
-    // check collision or proximity with a companion
+    m_PhysicsManager->Update();
 
     // update characters position
     m_MainCharacter.Update(deltaTime);
     m_Companion.Update(deltaTime);
 
     // update camera following the main character
-    
-    m_MainCamera.setCenter(m_MainCharacter.GetCenter());
-    m_Window.setView(m_MainCamera.getView());
+    if(m_MainCharacter.IsCameraSafe())
+    {
+        m_MainCamera.setCenter(m_MainCharacter.GetCenter());
+        m_Window.setView(m_MainCamera.getView());
+    }
 
     m_Door.Update(deltaTime);
 
-    if (!m_IsFinished)
+    if (m_Door.IsEndGame())
     {
-        //if (m_Door.IsColliding(m_MainCharacter))
-        //if (m_Door.Contains(m_MainCharacter.GetCenter()))
-        if (m_Door.Contains(m_MainCharacter))
-        {
-            m_EndgameSound.play();
+        m_EndgameSound.play();
 
-            m_MainCharacter.StartEndGame();
-            m_Door.StartEndGame();
-            m_IsFinished = true;
-        }
+        m_MainCharacter.StartEndGame();
+        m_IsFinished = true;
     }
 }
 

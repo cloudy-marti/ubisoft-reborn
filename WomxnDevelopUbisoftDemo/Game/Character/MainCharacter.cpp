@@ -31,12 +31,13 @@ namespace
 
 
 MainCharacter::MainCharacter(const std::string& filePath)
-    : Character{ { 250.f, 250.f }, 3, filePath }
-    , m_IsPlayingEndGame    { false }
-    , m_IsUsingJoystick     { false }
-    , m_JoystickIndex       { 0 }
-    , m_IsOnSlipperyFloor   { false }
-    , m_WasButtonPressed    { false }
+    : Character{ { 250.f, 250.f }, .5f, 3, filePath, BoxCollideable::Tag::PLAYER }
+    , m_IsPlayingEndGame  { false }
+    , m_IsUsingJoystick   { false }
+    , m_JoystickIndex     { 0 }
+    , m_IsOnSlipperyFloor { false }
+    , m_WasButtonPressed  { false }
+    , m_CameraSafe        { false }
 {
     m_IsUsingJoystick = GetFirstJoystickIndex(m_JoystickIndex);
 
@@ -45,11 +46,15 @@ MainCharacter::MainCharacter(const std::string& filePath)
     inputManager->BindKey(Keyboard::Left, *this, &MainCharacter::GoLeft);
     inputManager->BindKey(Keyboard::Up, *this, &MainCharacter::GoUp);
     inputManager->BindKey(Keyboard::Down, *this, &MainCharacter::GoDown);
+
+    m_BoundingBox.BindOnCollisionFunc(*this, &MainCharacter::onCollision);
 }
 
 
 void MainCharacter::Update(float deltaTime)
 {
+    m_CameraSafe = false;
+
     if (m_IsPlayingEndGame)
     {
         return;
@@ -78,15 +83,16 @@ void MainCharacter::Update(float deltaTime)
         }
     }
 
-    m_Velocity.x *= SLOWDOWN_RATE;
-    m_Velocity.y *= SLOWDOWN_RATE;
     /*if (m_IsOnSlipperyFloor)
     {
     }*/
 
+    m_Velocity.x *= SLOWDOWN_RATE;
+    m_Velocity.y *= SLOWDOWN_RATE;
+
     if (m_isCollidingWall)
     {
-        m_Position -= m_Velocity * deltaTime;
+        m_Position -= m_Velocity * deltaTime * 1.5f;
         m_Velocity.x = 0;
         m_Velocity.y = 0;
         m_isCollidingWall = false;
@@ -94,16 +100,38 @@ void MainCharacter::Update(float deltaTime)
     else
     {
         m_Position += m_Velocity * deltaTime;
+        m_CameraSafe = true;
     }
 
     m_Sprite.setPosition(m_Position);
-    SetCenter(m_Position);
+    m_BoundingBox.SetCenter(m_Position);
     m_Velocity = { 0.f, 0.f };
 }
 
 void MainCharacter::StartEndGame()
 {
     m_IsPlayingEndGame = true;
+}
+
+void MainCharacter::onCollision(const BoxCollideable& other)
+{
+    BoxCollideable::Tag tag = other.getTag();
+
+    switch (tag)
+    {
+    case BoxCollideable::Tag::COMPANION:
+        break;
+    case BoxCollideable::Tag::ENEMY:
+        break;
+    case BoxCollideable::Tag::WALL:
+    {
+        CollidesWall();
+        break;
+    }
+    case BoxCollideable::Tag::PLAYER:
+    default:
+        break;
+    }
 }
 
 // Use SPEED_MAX only if you want "just walking"
