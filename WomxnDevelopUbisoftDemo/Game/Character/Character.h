@@ -13,10 +13,17 @@ public:
 	virtual void onCollision(const BoxCollideable&) = 0;
 	virtual void CollidesRigidBody();
 
-	sf::Vector2f GetCenter() const { return m_BoundingBox.GetCenter(); }
+	inline sf::Vector2f GetCenter() const { return m_BoundingBox.GetCenter(); }
 
-	const float GetHP() const { return m_HealthPoints; }
-	void Heal(float hp) { m_HealthPoints = m_HealthPoints + hp <= m_MaxHealthPoints ? m_HealthPoints + hp : m_MaxHealthPoints; }
+	inline const float GetHP() const { return m_HealthPoints; }
+	inline void Heal(float hp) { m_HealthPoints = m_HealthPoints + hp <= m_MaxHealthPoints ? m_HealthPoints + hp : m_MaxHealthPoints; }
+
+	/* To be deleted */
+	inline std::string GetCoolDown()
+	{
+		return "cooldown : " + std::to_string(m_CoolDown) + "\ncurrent : " + std::to_string(m_CurrentCoolDown);
+	}
+	inline bool IsOnCoolDown() const { return m_OnCoolDown; }
 
 protected:
 	Character(sf::Vector2f position, float factor, float hp, float max_hp, float cooldown, const std::string& filePath, BoxCollideable::Tag tag);
@@ -36,9 +43,12 @@ protected:
 
 	bool m_isCollidingRigidBody;
 
-	float m_MaxHealthPoints;
+	const float m_MaxHealthPoints;
 	float m_HealthPoints;
-	float m_CoolDown;
+
+	const float m_CoolDown;
+	float m_CurrentCoolDown;
+	bool  m_OnCoolDown;
 
 	BoxCollideable m_BoundingBox;
 };

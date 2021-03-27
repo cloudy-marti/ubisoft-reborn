@@ -46,6 +46,10 @@ MainCharacter::MainCharacter(const std::string& filePath)
     inputManager->BindKey(Keyboard::Left, *this, &MainCharacter::GoLeft);
     inputManager->BindKey(Keyboard::Up, *this, &MainCharacter::GoUp);
     inputManager->BindKey(Keyboard::Down, *this, &MainCharacter::GoDown);
+    inputManager->BindKey(Keyboard::D, *this, &MainCharacter::GoRight);
+    inputManager->BindKey(Keyboard::Q, *this, &MainCharacter::GoLeft);
+    inputManager->BindKey(Keyboard::Z, *this, &MainCharacter::GoUp);
+    inputManager->BindKey(Keyboard::S, *this, &MainCharacter::GoDown);
 
     m_BoundingBox.BindOnCollisionFunc(*this, &MainCharacter::onCollision);
 }

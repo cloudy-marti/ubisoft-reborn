@@ -7,6 +7,8 @@ Character::Character(sf::Vector2f position, float factor, float hp, float max_hp
     , m_MaxHealthPoints         { max_hp }
     , m_HealthPoints            { hp }
     , m_CoolDown                { cooldown }
+    , m_CurrentCoolDown         { cooldown }
+    , m_OnCoolDown              { false }
 {
     m_Texture.loadFromFile(filePath);
 

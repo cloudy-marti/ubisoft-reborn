@@ -139,6 +139,8 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
         ImGui::Text("Distance from leader: %f", m_Companion.getDistanceToLeader());
 
         ImGui::Text("HP: %f", m_Companion.GetHP());
+
+        if (m_Companion.IsOnCoolDown()) { ImGui::Text(m_Companion.GetCoolDown().c_str()); }
     }
 
     if (ImGui::CollapsingHeader("2D Camera status"))

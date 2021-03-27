@@ -2,7 +2,7 @@
 #include <string>
 
 Companion::Companion(Character& leader, const std::string& filePath)
-	: Character{ { 800.f, 250.f }, .5f, 3.f, 5.f, 3.f, filePath, BoxCollideable::Tag::COMPANION }
+	: Character{ { 800.f, 250.f }, .5f, 3000.f, 5.f, 3.f, filePath, BoxCollideable::Tag::COMPANION }
 	, m_Leader				{ leader }
 	, m_IsAttachedToLeader	{ false }
 	, m_DistanceToLeader	{ getDistance(leader.GetCenter(), GetCenter()) }
@@ -19,14 +19,26 @@ Companion::Companion(Character& leader, const std::string& filePath)
 	m_WoofSound.setBuffer(m_WoofSoundBuffer);
 }
 
+#include <iostream>
 void Companion::Update(float deltaTime)
 {
+	if (m_OnCoolDown)
+	{
+		m_CurrentCoolDown -= deltaTime;
+		if (m_CurrentCoolDown <= 0.f)
+		{
+			m_OnCoolDown = false;
+			m_CurrentCoolDown = m_CoolDown;
+		}
+	}
+
 	m_DistanceToLeader = getDistance(m_Leader.GetCenter(), GetCenter());
 	if (!DetectsLeader())
 	{
 		m_IsAttachedToLeader = false;
 		return;
 	}
+
 	m_IsAttachedToLeader = true;
 	if (IsCloseToLeader())
 	{
@@ -37,9 +49,6 @@ void Companion::Update(float deltaTime)
 
 	m_Velocity.x = leaderPosition.x - m_Position.x;
 	m_Velocity.y = leaderPosition.y - m_Position.y;
-
-	//m_Velocity.x *= SLOWDOWN_RATE;
-	//m_Velocity.y *= SLOWDOWN_RATE;
 
 	if (m_isCollidingRigidBody)
 	{
@@ -82,8 +91,9 @@ void Companion::PetTheCompanion()
 
 void Companion::HealLeader()
 {
-	if (IsCloseToLeader())
+	if (IsCloseToLeader() && !m_OnCoolDown)
 	{
+		m_OnCoolDown = true;
 		m_Leader.Heal(.5f);
 	}
 }
