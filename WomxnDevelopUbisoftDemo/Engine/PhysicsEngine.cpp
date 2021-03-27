@@ -3,8 +3,7 @@
 PhysicsEngine* PhysicsEngine::_Instance = nullptr;
 
 PhysicsEngine::PhysicsEngine()
-{
-}
+{}
 
 PhysicsEngine* PhysicsEngine::GetInstance()
 {
@@ -26,6 +25,7 @@ void PhysicsEngine::Update()
     {
         for (BoxCollideable* bbox1 : m_Colliders)
         {
+            // this is the most common use case
             if (bbox->getTag() == BoxCollideable::Tag::WALL
                 && bbox1->getTag() == BoxCollideable::Tag::WALL)
             {

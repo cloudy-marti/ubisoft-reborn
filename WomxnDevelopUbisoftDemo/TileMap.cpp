@@ -1,9 +1,11 @@
 #include "stdafx.h"
+#include <iostream>
 
 bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const int* tiles, size_t width, size_t height)
 {
 	if (!m_Tileset.loadFromFile(tileset))
 	{
+        std::cerr << "Tileset file not found" << std::endl;
 		return false;
 	}
 
