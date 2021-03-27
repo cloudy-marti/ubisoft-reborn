@@ -1,14 +1,17 @@
 #include <stdafx.h>
 #include <string>
 
-Companion::Companion(const Character& leader, const std::string& filePath)
-	: Character{ { 800.f, 250.f }, .5f, 3,  filePath, BoxCollideable::Tag::COMPANION }
+Companion::Companion(Character& leader, const std::string& filePath)
+	: Character{ { 800.f, 250.f }, .5f, 3.f, 5.f, 3.f, filePath, BoxCollideable::Tag::COMPANION }
 	, m_Leader				{ leader }
 	, m_IsAttachedToLeader	{ false }
-	, m_Distance			{ 30.f }
+	, m_DistanceToLeader	{ getDistance(leader.GetCenter(), GetCenter()) }
+	, m_DetectionDistance	{ 300.f }
+	, m_FollowDistance		{ 50.f }
 {
 	InputManager* inputManager = InputManager::GetInstance();
-	inputManager->BindKey(sf::Keyboard::Space, *this, &Companion::ToggleLeaderAttachment);
+	inputManager->BindKey(sf::Keyboard::Space, *this, &Companion::PetTheCompanion);
+	inputManager->BindKey(sf::Keyboard::A, *this, &Companion::HealLeader);
 
 	m_BoundingBox.BindOnCollisionFunc(*this, &Companion::onCollision);
 
@@ -16,28 +19,52 @@ Companion::Companion(const Character& leader, const std::string& filePath)
 	m_WoofSound.setBuffer(m_WoofSoundBuffer);
 }
 
-#include <iostream>
 void Companion::Update(float deltaTime)
 {
-	if (!m_IsAttachedToLeader)
+	m_DistanceToLeader = getDistance(m_Leader.GetCenter(), GetCenter());
+	if (!DetectsLeader())
+	{
+		m_IsAttachedToLeader = false;
+		return;
+	}
+	m_IsAttachedToLeader = true;
+	if (IsCloseToLeader())
 	{
 		return;
 	}
+
+	sf::Vector2f leaderPosition = m_Leader.GetCenter();
+
+	m_Velocity.x = leaderPosition.x - m_Position.x;
+	m_Velocity.y = leaderPosition.y - m_Position.y;
+
+	//m_Velocity.x *= SLOWDOWN_RATE;
+	//m_Velocity.y *= SLOWDOWN_RATE;
+
+	if (m_isCollidingRigidBody)
+	{
+		m_Position = m_OldPosition;
+		m_isCollidingRigidBody = false;
+	}
 	else
 	{
-		// TODO
+		m_OldPosition = m_Position;
+		m_Position += m_Velocity * deltaTime;
 	}
+
+	m_Sprite.setPosition(m_Position);
+	m_BoundingBox.SetCenter(m_Position);
+	m_Velocity = { 0.f, 0.f };
 }
 
-#include <math.h>
-double getDistance(sf::Vector2f first, sf::Vector2f second)
+bool Companion::IsCloseToLeader() const
 {
-	return pow(pow(first.x - second.x, 2) + pow(first.y - second.y, 2), 0.5);
+	return m_DistanceToLeader < m_FollowDistance;
 }
 
-bool Companion::IsNearLeader() const
+bool Companion::DetectsLeader() const
 {
-	return getDistance(m_Leader.GetCenter(), GetCenter()) < m_Distance;
+	return m_DistanceToLeader < m_DetectionDistance;
 }
 
 bool Companion::IsAttached() const
@@ -45,14 +72,20 @@ bool Companion::IsAttached() const
 	return m_IsAttachedToLeader;
 }
 
-void Companion::ToggleLeaderAttachment()
+void Companion::PetTheCompanion()
 {
-	if (m_IsAttachedToLeader)
+	if (IsCloseToLeader())
 	{
-		return;
+		m_WoofSound.play();
 	}
-	m_IsAttachedToLeader = !m_IsAttachedToLeader;
-	m_WoofSound.play();
+}
+
+void Companion::HealLeader()
+{
+	if (IsCloseToLeader())
+	{
+		m_Leader.Heal(.5f);
+	}
 }
 
 void Companion::onCollision(const BoxCollideable& other)
@@ -62,17 +95,24 @@ void Companion::onCollision(const BoxCollideable& other)
 	switch (tag)
 	{
 	case BoxCollideable::Tag::PLAYER:
-		std::cout << "hello !" << std::endl;
+	{
+		CollidesRigidBody();
 		break;
+	}
 	case BoxCollideable::Tag::ENEMY:
 		break;
 	case BoxCollideable::Tag::WALL:
 	{
-		CollidesWall();
+		CollidesRigidBody();
 		break;
 	}
 	case BoxCollideable::Tag::COMPANION:
 	default:
 		break;
 	}
+}
+
+void Companion::CollidesRigidBody()
+{
+	Character::CollidesRigidBody();
 }

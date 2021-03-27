@@ -9,7 +9,7 @@ public:
 	void Update(float) override;
 	void StartEndGame();
 
-	inline bool IsCollidingWall() const { return m_isCollidingWall; }
+	inline bool IsCollidingWall() const { return m_isCollidingRigidBody; }
 	inline bool IsCameraSafe() const { return m_CameraSafe; }
 
 	void onCollision(const BoxCollideable&) override;
@@ -25,12 +25,7 @@ private:
 
 	bool m_IsPlayingEndGame;
 
-// Private constants only used within this class
 private:
-	const float SPEED_MAX = 150.0f;
-	const float SPEED_INC = 10.0f;
-	const float DEAD_ZONE = 5.0f;
-	const float SLOWDOWN_RATE = 0.9f;
 
 // Private member-functions that are called by InputManager
 private:

@@ -3,21 +3,28 @@
 class Companion : public Character
 {
 public:
-	Companion(const Character&, const std::string&);
+	Companion(Character&, const std::string&);
 	void Update(float) override;
-	bool IsNearLeader() const;
 
+	bool IsCloseToLeader() const;
+	bool DetectsLeader() const;
 	bool IsAttached() const;
-	void ToggleLeaderAttachment();
+
+	void PetTheCompanion();
+	void HealLeader();
 
 	void onCollision(const BoxCollideable&) override;
+	void CollidesRigidBody() override;
+
+	const double getDistanceToLeader() const { return m_DistanceToLeader; };
 
 protected:
 private:
-	const Character& m_Leader;
+	Character& m_Leader;
 	bool m_IsAttachedToLeader;
-
-	float m_Distance;
+	double m_DistanceToLeader;
+	float m_DetectionDistance;
+	float m_FollowDistance;
 
 	sf::SoundBuffer m_WoofSoundBuffer;
 	sf::Sound m_WoofSound;

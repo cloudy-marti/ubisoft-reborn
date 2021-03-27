@@ -31,7 +31,7 @@ namespace
 
 
 MainCharacter::MainCharacter(const std::string& filePath)
-    : Character{ { 250.f, 250.f }, .5f, 3, filePath, BoxCollideable::Tag::PLAYER }
+    : Character{ { 250.f, 250.f }, .5f, 3.f, 15.f, 0.f, filePath, BoxCollideable::Tag::PLAYER }
     , m_IsPlayingEndGame  { false }
     , m_IsUsingJoystick   { false }
     , m_JoystickIndex     { 0 }
@@ -83,22 +83,17 @@ void MainCharacter::Update(float deltaTime)
         }
     }
 
-    /*if (m_IsOnSlipperyFloor)
-    {
-    }*/
-
     m_Velocity.x *= SLOWDOWN_RATE;
     m_Velocity.y *= SLOWDOWN_RATE;
 
-    if (m_isCollidingWall)
+    if (m_isCollidingRigidBody)
     {
-        m_Position -= m_Velocity * deltaTime * 1.5f;
-        m_Velocity.x = 0;
-        m_Velocity.y = 0;
-        m_isCollidingWall = false;
+        m_Position = m_OldPosition;
+        m_isCollidingRigidBody = false;
     }
     else
     {
+        m_OldPosition = m_Position;
         m_Position += m_Velocity * deltaTime;
         m_CameraSafe = true;
     }
@@ -120,12 +115,15 @@ void MainCharacter::onCollision(const BoxCollideable& other)
     switch (tag)
     {
     case BoxCollideable::Tag::COMPANION:
+    {
+        CollidesRigidBody();
         break;
+    }
     case BoxCollideable::Tag::ENEMY:
         break;
     case BoxCollideable::Tag::WALL:
     {
-        CollidesWall();
+        CollidesRigidBody();
         break;
     }
     case BoxCollideable::Tag::PLAYER:

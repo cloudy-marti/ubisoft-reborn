@@ -1,9 +1,12 @@
 #include "stdafx.h"
 
-Character::Character(sf::Vector2f position, float factor, int hp, const std::string& filePath, BoxCollideable::Tag tag)
-    : m_Position        { position }
-    , m_isCollidingWall { false }
-    , m_HealthPoints    { hp }
+Character::Character(sf::Vector2f position, float factor, float hp, float max_hp, float cooldown, const std::string& filePath, BoxCollideable::Tag tag)
+    : m_Position                { position }
+    , m_OldPosition             { position }
+    , m_isCollidingRigidBody    { false }
+    , m_MaxHealthPoints         { max_hp }
+    , m_HealthPoints            { hp }
+    , m_CoolDown                { cooldown }
 {
     m_Texture.loadFromFile(filePath);
 
@@ -23,7 +26,7 @@ void Character::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(m_Sprite);
 }
 
-void Character::CollidesWall()
+void Character::CollidesRigidBody()
 {
-    m_isCollidingWall = true;
+    m_isCollidingRigidBody = true;
 }
