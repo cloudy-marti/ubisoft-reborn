@@ -34,7 +34,6 @@ private:
     sf::Sound m_EndgameSound;
 
     Door m_Door;
-    /*std::vector<Wall*> m_Walls;*/
 
     TileMap m_Map;
 

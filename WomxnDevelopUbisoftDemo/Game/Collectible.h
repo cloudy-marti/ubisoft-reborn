@@ -16,4 +16,3 @@ private:
 
 	sf::Vector2f m_Position;
 };
-

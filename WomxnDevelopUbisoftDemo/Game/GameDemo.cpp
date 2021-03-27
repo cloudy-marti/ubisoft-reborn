@@ -119,22 +119,26 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
     ImGui::Text("Press F1 to close this debug menu");
     ImGui::NewLine();
 
+    const auto& mainCharCenterPos = m_MainCharacter.GetCenter();
+    const auto& charCenterPos = m_Companion.GetCenter();
+    
     if (ImGui::CollapsingHeader("Main character status"))
     {
-        const auto& mainCharCenterPos = m_MainCharacter.GetCenter();
-
         ImGui::Text("X: %f", mainCharCenterPos.x);
         ImGui::Text("Y: %f", mainCharCenterPos.y);
+
+        ImGui::Text("HP: %f", m_MainCharacter.GetHP());
     }
 
     if (ImGui::CollapsingHeader("Companion status"))
     {
-        const auto& charCenterPos = m_Companion.GetCenter();
-
         ImGui::Text("X: %f", charCenterPos.x);
         ImGui::Text("Y: %f", charCenterPos.y);
 
         ImGui::Text("Attached: %s", m_Companion.IsAttached() ? "yes" : "no");
+        ImGui::Text("Distance from leader: %f", m_Companion.getDistanceToLeader());
+
+        ImGui::Text("HP: %f", m_Companion.GetHP());
     }
 
     if (ImGui::CollapsingHeader("2D Camera status"))
@@ -150,10 +154,6 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
         ImGui::Text("Current View");
         ImGui::Text("X: %f", windowViewCenterPos.x);
         ImGui::Text("Y: %f\n", windowViewCenterPos.y);
-
-        ImGui::Text("Default View");
-        ImGui::Text("X: %f", windowDefaultViewCenterPos.x);
-        ImGui::Text("Y: %f\n", windowDefaultViewCenterPos.y);
     }
 
     if (ImGui::CollapsingHeader("Game status"))

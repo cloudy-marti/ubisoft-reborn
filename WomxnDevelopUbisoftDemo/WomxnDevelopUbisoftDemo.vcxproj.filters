@@ -59,6 +59,9 @@
     <ClCompile Include="Engine\PhysicsEngine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Math.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -108,6 +111,9 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math.h">
       <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>

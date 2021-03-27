@@ -12,6 +12,7 @@ public:
         PLAYER,
         COMPANION,
         ENEMY,
+        TRIGGER,
         CHECKPOINT,
         WALL,
         HOLE

@@ -12,6 +12,7 @@
 #include <Engine/Camera.h>
 #include <Engine/InputManager.h>
 #include <Engine/PhysicsEngine.h>
+#include <Engine/Math.h>
 
 #include <Game/GameDemo.h>
 #include <Game/Door.h>
