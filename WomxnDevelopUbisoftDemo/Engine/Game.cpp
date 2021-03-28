@@ -51,6 +51,10 @@ void Game::RunGameLoop()
                     {
                         toggleImGui = !toggleImGui;
                     }
+                    else if (event.key.code == sf::Keyboard::F3)
+                    {
+                        m_InputManager->ToggleKeyboardLayout();
+                    }
                     break;
                 }
                 case sf::Event::Resized:

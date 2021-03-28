@@ -160,6 +160,7 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
 
     if (ImGui::CollapsingHeader("Game status"))
     {
+        ImGui::Text("Keyboard Layout: %d", (int)m_InputManager->m_KeyboardLayout);
         if (m_IsFinished)
         {
             ImGui::TextColored(ImVec4(255.f, 0.f, 0.f, 1.f), "GAME ENDED");

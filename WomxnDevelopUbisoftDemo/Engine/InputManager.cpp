@@ -27,8 +27,8 @@ bool InputManager::RemoveKey(const sf::Keyboard::Key& key)
 }
 
 void InputManager::Update()
-{
-    for (auto const& [key, val] : m_keyBindings)
+{    
+    for (auto const& [key, val] : m_CurrentKeyBindings)
     {
         if (!sf::Keyboard::isKeyPressed(key))
         {
@@ -38,3 +38,25 @@ void InputManager::Update()
     }
 }
 
+void InputManager::ToggleKeyboardLayout()
+{
+	m_KeyboardLayout = static_cast<Layout>((static_cast<int>(m_KeyboardLayout) + 1) % static_cast<int>(Layout::L_SIZE));
+	switch (m_KeyboardLayout)
+	{
+		case InputManager::Layout::QWERTY:
+		{
+			m_CurrentKeyBindings = m_qKeyBindings;
+			break;
+		}
+		case InputManager::Layout::AZERTY:
+		{
+			m_CurrentKeyBindings = m_aKeyBindings;
+			break;
+		}
+		default:
+		{
+			m_CurrentKeyBindings = m_keyBindings;
+			break;
+		}
+	}
+};

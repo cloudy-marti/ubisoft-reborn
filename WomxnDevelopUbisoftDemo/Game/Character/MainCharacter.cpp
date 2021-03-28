@@ -3,57 +3,58 @@
 using namespace sf;
 
 // Joystick helpers
-namespace
-{
-    bool GetFirstJoystickIndex(unsigned int& index)
-    {
-        index = 0;
-        while (index < Joystick::Count)
-        {
-            if (Joystick::isConnected(index) && Joystick::hasAxis(index, Joystick::Axis::X) && Joystick::hasAxis(index, Joystick::Axis::Y))
-                return true;
-
-            index++;
-        }
-
-        return false;
-    }
-
-    float GetScaledAxis(unsigned int index, sf::Joystick::Axis axis, float deadZone, float scale)
-    {
-        float value = (Joystick::getAxisPosition(index, axis) / 100.0f) * scale;
-        if (value >= -deadZone && value <= deadZone)
-            return 0.0f;
-
-        return value;
-    }
-}
+//namespace
+//{
+//    bool GetFirstJoystickIndex(unsigned int& index)
+//    {
+//        index = 0;
+//        while (index < Joystick::Count)
+//        {
+//            if (Joystick::isConnected(index) && Joystick::hasAxis(index, Joystick::Axis::X) && Joystick::hasAxis(index, Joystick::Axis::Y))
+//                return true;
+//
+//            index++;
+//        }
+//
+//        return false;
+//    }
+//
+//    float GetScaledAxis(unsigned int index, sf::Joystick::Axis axis, float deadZone, float scale)
+//    {
+//        float value = (Joystick::getAxisPosition(index, axis) / 100.0f) * scale;
+//        if (value >= -deadZone && value <= deadZone)
+//            return 0.0f;
+//
+//        return value;
+//    }
+//}
 
 
 MainCharacter::MainCharacter(const std::string& filePath)
     : Character{ { 250.f, 250.f }, .5f, 3.f, 15.f, 0.f, filePath, BoxCollideable::Tag::PLAYER }
     , m_IsPlayingEndGame  { false }
-    , m_IsUsingJoystick   { false }
-    , m_JoystickIndex     { 0 }
+    //, m_IsUsingJoystick   { false }
+    //, m_JoystickIndex     { 0 }
     , m_IsOnSlipperyFloor { false }
-    , m_WasButtonPressed  { false }
+    //, m_WasButtonPressed  { false }
     , m_CameraSafe        { false }
 {
-    m_IsUsingJoystick = GetFirstJoystickIndex(m_JoystickIndex);
-
-    InputManager* inputManager = InputManager::GetInstance();
-    inputManager->BindKey(Keyboard::Right, *this, &MainCharacter::GoRight);
-    inputManager->BindKey(Keyboard::Left, *this, &MainCharacter::GoLeft);
-    inputManager->BindKey(Keyboard::Up, *this, &MainCharacter::GoUp);
-    inputManager->BindKey(Keyboard::Down, *this, &MainCharacter::GoDown);
-    inputManager->BindKey(Keyboard::D, *this, &MainCharacter::GoRight);
-    inputManager->BindKey(Keyboard::Q, *this, &MainCharacter::GoLeft);
-    inputManager->BindKey(Keyboard::Z, *this, &MainCharacter::GoUp);
-    inputManager->BindKey(Keyboard::S, *this, &MainCharacter::GoDown);
+    //m_IsUsingJoystick = GetFirstJoystickIndex(m_JoystickIndex);
+    BindDirectionKeys();
 
     m_BoundingBox.BindOnCollisionFunc(*this, &MainCharacter::onCollision);
 }
 
+/* To be called only on constructor */
+void MainCharacter::BindDirectionKeys()
+{
+    InputManager* inputManager = InputManager::GetInstance();
+
+    inputManager->BindKey(Keyboard::Up,    Keyboard::W, Keyboard::Z, *this, &MainCharacter::GoUp);
+    inputManager->BindKey(Keyboard::Left,  Keyboard::A, Keyboard::Q, *this, &MainCharacter::GoLeft);
+    inputManager->BindKey(Keyboard::Down,  Keyboard::S, Keyboard::S, *this, &MainCharacter::GoDown);
+    inputManager->BindKey(Keyboard::Right, Keyboard::D, Keyboard::D, *this, &MainCharacter::GoRight);
+}
 
 void MainCharacter::Update(float deltaTime)
 {
@@ -64,7 +65,7 @@ void MainCharacter::Update(float deltaTime)
         return;
     }
 
-    if (m_IsUsingJoystick)
+    /*if (m_IsUsingJoystick)
     {
         m_Velocity.x = GetScaledAxis(m_JoystickIndex, Joystick::Axis::X, DEAD_ZONE, SPEED_MAX);
         m_Velocity.y = GetScaledAxis(m_JoystickIndex, Joystick::Axis::Y, DEAD_ZONE, SPEED_MAX);
@@ -85,7 +86,7 @@ void MainCharacter::Update(float deltaTime)
                 m_WasButtonPressed = false;
             }
         }
-    }
+    }*/
 
     m_Velocity.x *= SLOWDOWN_RATE;
     m_Velocity.y *= SLOWDOWN_RATE;

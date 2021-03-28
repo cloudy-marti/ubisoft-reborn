@@ -15,19 +15,19 @@ public:
 	void onCollision(const BoxCollideable&) override;
 
 private:
-	bool m_IsUsingJoystick;
-	unsigned int m_JoystickIndex;
-	bool m_WasButtonPressed;
+	void BindDirectionKeys();
+
+	//bool m_IsUsingJoystick;
+	//unsigned int m_JoystickIndex;
+	//bool m_WasButtonPressed;
 
 	bool m_IsOnSlipperyFloor;
-
 	bool m_CameraSafe;
-
 	bool m_IsPlayingEndGame;
 
 private:
 
-// Private member-functions that are called by InputManager
+// Private member-functions that are binded to InputManager
 private:
 	inline void GoRight();
 	inline void GoLeft();
