@@ -11,7 +11,7 @@ class InputManager
 public:
 	enum class Layout
 	{
-		DEFAULT,
+		ARROWS,
 		QWERTY,
 		AZERTY,
 		L_SIZE
@@ -19,7 +19,6 @@ public:
 
 public:
 	static InputManager* GetInstance();
-	Layout m_KeyboardLayout = Layout::DEFAULT;
 
 	// Binds a keyboard key to a function, needs to be on header file
 	// otherwise compiler tries to resolve a "yet unknown" templated function  type
@@ -35,10 +34,13 @@ public:
 	void Update();
 
 	void ToggleKeyboardLayout();
+	std::string GetKeyboardLayout() const;
 
 private:
 	InputManager();
 	static InputManager* _Instance;
+
+	Layout m_KeyboardLayout = Layout::ARROWS;
 	
 	std::map <sf::Keyboard::Key, std::function<void(void)>> m_keyBindings;
 	std::map <sf::Keyboard::Key, std::function<void(void)>> m_qKeyBindings;

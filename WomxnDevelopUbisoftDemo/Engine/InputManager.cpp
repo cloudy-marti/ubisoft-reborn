@@ -59,4 +59,18 @@ void InputManager::ToggleKeyboardLayout()
 			break;
 		}
 	}
-};
+}
+std::string InputManager::GetKeyboardLayout() const
+{
+	switch (m_KeyboardLayout)
+	{
+	case InputManager::Layout::ARROWS:
+		return "Default";
+	case InputManager::Layout::QWERTY:
+		return "QWERTY";
+	case InputManager::Layout::AZERTY:
+		return "AZERTY";
+	default:
+		return "ERROR";
+	}
+}
