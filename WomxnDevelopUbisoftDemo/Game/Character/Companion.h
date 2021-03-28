@@ -28,4 +28,7 @@ private:
 
 	sf::SoundBuffer m_WoofSoundBuffer;
 	sf::Sound m_WoofSound;
+
+	sf::SoundBuffer m_MlemSoundBuffer;
+	sf::Sound m_MlemSound;
 };

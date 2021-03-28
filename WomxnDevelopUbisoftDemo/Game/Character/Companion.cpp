@@ -2,7 +2,7 @@
 #include <string>
 
 Companion::Companion(Character& leader, const std::string& filePath)
-	: Character{ { 800.f, 250.f }, .5f, 3000.f, 5.f, 3.f, filePath, BoxCollideable::Tag::COMPANION }
+	: Character{ { 800.f, 250.f }, .5f, 3.f, 5.f, 3.f, filePath, BoxCollideable::Tag::COMPANION }
 	, m_Leader				{ leader }
 	, m_IsAttachedToLeader	{ false }
 	, m_DistanceToLeader	{ getDistance(leader.GetCenter(), GetCenter()) }
@@ -17,6 +17,9 @@ Companion::Companion(Character& leader, const std::string& filePath)
 
 	m_WoofSoundBuffer.loadFromFile("Assets\\sound\\wowo.wav");
 	m_WoofSound.setBuffer(m_WoofSoundBuffer);
+
+	m_MlemSoundBuffer.loadFromFile("Assets\\sound\\mlem.wav");
+	m_MlemSound.setBuffer(m_MlemSoundBuffer);
 }
 
 void Companion::Update(float deltaTime)
@@ -93,7 +96,8 @@ void Companion::HealLeader()
 	if (IsCloseToLeader() && !m_OnCoolDown)
 	{
 		m_OnCoolDown = true;
-		m_Leader.Heal(.5f);
+		m_MlemSound.play();
+		m_Leader.Heal(1.f);
 	}
 }
 

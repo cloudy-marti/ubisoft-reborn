@@ -18,7 +18,7 @@ public:
 	inline const float GetHP() const { return m_HealthPoints; }
 	inline void Heal(float hp) { m_HealthPoints = m_HealthPoints + hp <= m_MaxHealthPoints ? m_HealthPoints + hp : m_MaxHealthPoints; }
 
-	/* To be deleted */
+	/* Debug: To be deleted */
 	inline std::string GetCoolDown()
 	{
 		return "cooldown : " + std::to_string(m_CoolDown) + "\ncurrent : " + std::to_string(m_CurrentCoolDown);

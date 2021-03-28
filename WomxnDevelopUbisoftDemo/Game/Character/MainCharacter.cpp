@@ -60,10 +60,10 @@ void MainCharacter::Update(float deltaTime)
 {
     m_CameraSafe = false;
 
-    if (m_IsPlayingEndGame)
+    /*if (m_IsPlayingEndGame)
     {
         return;
-    }
+    }*/
 
     /*if (m_IsUsingJoystick)
     {
