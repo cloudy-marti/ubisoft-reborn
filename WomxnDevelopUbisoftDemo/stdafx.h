@@ -12,7 +12,9 @@
 #include <Engine/Camera.h>
 #include <Engine/InputManager.h>
 #include <Engine/Physics/PhysicsEngine.h>
-#include <Engine/Math.h>
+#include <Engine/Utils/Math.h>
+#include <Engine/Level/LevelManager.h>
+#include <Engine/Level/Level.h>
 
 #include <Game/GameReborn.h>
 #include <Game/Door.h>

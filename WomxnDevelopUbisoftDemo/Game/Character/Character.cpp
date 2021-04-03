@@ -1,7 +1,8 @@
 #include "stdafx.h"
 
-Character::Character(sf::Vector2f position, float factor, float hp, float max_hp, float cooldown, const std::string& filePath, BoxCollideable::Tag tag)
+Character::Character(sf::Vector2f position, float max_speed, float hp, float max_hp, float cooldown, const std::string& filePath, BoxCollideable::Tag tag)
     : m_Position                { position }
+    , m_MaxSpeed                { max_speed }
     , m_OldPosition             { position }
     , m_LastCheckPoint          { position }
     , m_isCollidingRigidBody    { false }
@@ -16,12 +17,12 @@ Character::Character(sf::Vector2f position, float factor, float hp, float max_hp
     const sf::Vector2f textureSize(static_cast<float>(m_Texture.getSize().x), static_cast<float>(m_Texture.getSize().y));
 
     m_Sprite.setTexture(m_Texture);
-    m_Sprite.setOrigin(textureSize * 0.5f);
+    m_Sprite.setOrigin(textureSize * .5f);
     m_Sprite.setPosition(m_Position);
-    m_Sprite.setScale({ factor, factor });
+    m_Sprite.setScale({ .5f, .5f });
 
     m_BoundingBox.setTag(tag);
-    m_BoundingBox.SetBoundingBox(m_Position, textureSize * factor);
+    m_BoundingBox.SetBoundingBox(m_Position, textureSize * .5f);
 }
 
 void Character::draw(sf::RenderTarget& target, sf::RenderStates states) const

@@ -28,10 +28,10 @@ public:
 	inline bool IsOnCoolDown() const { return m_OnCoolDown; }
 
 protected:
-	Character(sf::Vector2f position, float factor, float hp, float max_hp, float cooldown, const std::string& filePath, BoxCollideable::Tag tag);
+	Character(sf::Vector2f position, float max_speed, float hp, float max_hp, float cooldown, const std::string& filePath, BoxCollideable::Tag tag);
 
 	// Private constants
-	const float SPEED_MAX = 150.0f;
+	const float m_MaxSpeed;
 	const float SPEED_INC = 10.0f;
 	const float DEAD_ZONE = 5.0f;
 	const float SLOWDOWN_RATE = 0.9f;

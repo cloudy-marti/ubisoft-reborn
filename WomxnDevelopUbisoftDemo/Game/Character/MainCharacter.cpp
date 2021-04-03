@@ -3,7 +3,7 @@
 using namespace sf;
 
 MainCharacter::MainCharacter(const std::string& filePath)
-    : Character{ { 250.f, 250.f }, .5f, 3.f, 15.f, 0.f, filePath, BoxCollideable::Tag::PLAYER }
+    : Character{ { 250.f, 250.f }, 150.f, 3.f, 15.f, 0.f, filePath, BoxCollideable::Tag::PLAYER }
     , m_IsPlayingEndGame    { false }
     , m_IsOnSlipperyFloor   { false }
     , m_CameraSafe          { false }
@@ -98,11 +98,11 @@ inline void MainCharacter::GoRight()
 {
     if (!m_IsOnSlipperyFloor)
     {
-        m_Velocity.x = SPEED_MAX;
+        m_Velocity.x = m_MaxSpeed;
     }
     else
     {
-        m_Velocity.x = fmin(m_Velocity.x + SPEED_INC, SPEED_MAX);
+        m_Velocity.x = fmin(m_Velocity.x + SPEED_INC, m_MaxSpeed);
     }
 }
 
@@ -110,11 +110,11 @@ inline void MainCharacter::GoLeft()
 {
     if (!m_IsOnSlipperyFloor)
     {
-        m_Velocity.x = -SPEED_MAX;
+        m_Velocity.x = -m_MaxSpeed;
     }
     else
     {
-        m_Velocity.x = fmax(m_Velocity.x - SPEED_INC, -SPEED_MAX);
+        m_Velocity.x = fmax(m_Velocity.x - SPEED_INC, -m_MaxSpeed);
     }
 }
 
@@ -122,11 +122,11 @@ inline void MainCharacter::GoDown()
 {
     if (!m_IsOnSlipperyFloor)
     {
-        m_Velocity.y = SPEED_MAX;
+        m_Velocity.y = m_MaxSpeed;
     }
     else
     {
-        m_Velocity.y = fmin(m_Velocity.y + SPEED_INC, SPEED_MAX);
+        m_Velocity.y = fmin(m_Velocity.y + SPEED_INC, m_MaxSpeed);
     }
 }
 
@@ -134,10 +134,10 @@ inline void MainCharacter::GoUp()
 {
     if (!m_IsOnSlipperyFloor)
     {
-        m_Velocity.y = -SPEED_MAX;
+        m_Velocity.y = -m_MaxSpeed;
     }
     else
     {
-        m_Velocity.y = fmax(m_Velocity.y - SPEED_INC, -SPEED_MAX);
+        m_Velocity.y = fmax(m_Velocity.y - SPEED_INC, -m_MaxSpeed);
     }
 }
