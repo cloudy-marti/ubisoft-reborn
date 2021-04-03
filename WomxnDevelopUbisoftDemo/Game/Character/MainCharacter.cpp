@@ -2,44 +2,12 @@
 
 using namespace sf;
 
-// Joystick helpers
-//namespace
-//{
-//    bool GetFirstJoystickIndex(unsigned int& index)
-//    {
-//        index = 0;
-//        while (index < Joystick::Count)
-//        {
-//            if (Joystick::isConnected(index) && Joystick::hasAxis(index, Joystick::Axis::X) && Joystick::hasAxis(index, Joystick::Axis::Y))
-//                return true;
-//
-//            index++;
-//        }
-//
-//        return false;
-//    }
-//
-//    float GetScaledAxis(unsigned int index, sf::Joystick::Axis axis, float deadZone, float scale)
-//    {
-//        float value = (Joystick::getAxisPosition(index, axis) / 100.0f) * scale;
-//        if (value >= -deadZone && value <= deadZone)
-//            return 0.0f;
-//
-//        return value;
-//    }
-//}
-
-
 MainCharacter::MainCharacter(const std::string& filePath)
     : Character{ { 250.f, 250.f }, .5f, 3.f, 15.f, 0.f, filePath, BoxCollideable::Tag::PLAYER }
-    , m_IsPlayingEndGame  { false }
-    //, m_IsUsingJoystick   { false }
-    //, m_JoystickIndex     { 0 }
-    , m_IsOnSlipperyFloor { false }
-    //, m_WasButtonPressed  { false }
-    , m_CameraSafe        { false }
+    , m_IsPlayingEndGame    { false }
+    , m_IsOnSlipperyFloor   { false }
+    , m_CameraSafe          { false }
 {
-    //m_IsUsingJoystick = GetFirstJoystickIndex(m_JoystickIndex);
     BindDirectionKeys();
 
     m_BoundingBox.BindOnCollisionFunc(*this, &MainCharacter::onCollision);
@@ -59,34 +27,6 @@ void MainCharacter::BindDirectionKeys()
 void MainCharacter::Update(float deltaTime)
 {
     m_CameraSafe = false;
-
-    /*if (m_IsPlayingEndGame)
-    {
-        return;
-    }*/
-
-    /*if (m_IsUsingJoystick)
-    {
-        m_Velocity.x = GetScaledAxis(m_JoystickIndex, Joystick::Axis::X, DEAD_ZONE, SPEED_MAX);
-        m_Velocity.y = GetScaledAxis(m_JoystickIndex, Joystick::Axis::Y, DEAD_ZONE, SPEED_MAX);
-
-        if (Joystick::isButtonPressed(m_JoystickIndex, 0))
-        {
-            if (!m_WasButtonPressed)
-            {
-                m_Sprite.setScale(0.8f, 0.8f);
-                m_WasButtonPressed = true;
-            }
-        }
-        else
-        {
-            if (m_WasButtonPressed)
-            {
-                m_Sprite.setScale(1.0f, 1.0f);
-                m_WasButtonPressed = false;
-            }
-        }
-    }*/
 
     m_Velocity.x *= SLOWDOWN_RATE;
     m_Velocity.y *= SLOWDOWN_RATE;
