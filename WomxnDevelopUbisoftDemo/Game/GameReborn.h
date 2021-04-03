@@ -8,13 +8,13 @@
 #include <Game/Character/Companion.h>
 #include <Game/CollideableObject.h>
 #include <Engine/Camera.h>
-#include <TileMap.h>
+#include <Engine/Level/TileMap.h>
 
-class GameDemo : public Game
+class GameReborn : public Game
 {
 public:
-    GameDemo();
-    ~GameDemo();
+    GameReborn();
+    ~GameReborn();
 
     void Update(float deltaTime) override;
 

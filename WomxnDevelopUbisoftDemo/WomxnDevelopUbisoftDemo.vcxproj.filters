@@ -26,11 +26,8 @@
     <ClCompile Include="Engine\Game.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Game\GameDemo.cpp">
+    <ClCompile Include="Game\GameReborn.cpp">
       <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Collision.cpp">
-      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Game\CollideableObject.cpp">
       <Filter>Game</Filter>
@@ -53,14 +50,20 @@
     <ClCompile Include="Engine\InputManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\PhysicsEngine.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Math.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Physics\Collision.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Physics\PhysicsEngine.cpp">
+      <Filter>Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Level\LevelManager.cpp">
+      <Filter>Engine\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Level\TileMap.cpp">
+      <Filter>Engine\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,14 +83,8 @@
     <ClInclude Include="Engine\Game.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Game\GameDemo.h">
+    <ClInclude Include="Game\GameReborn.h">
       <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Collision.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\PhysicsEngine.h">
-      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Game\Collectible.h">
       <Filter>Game</Filter>
@@ -110,11 +107,20 @@
     <ClInclude Include="Engine\InputManager.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="TileMap.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Math.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Physics\Collision.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Physics\PhysicsEngine.h">
+      <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Level\LevelManager.h">
+      <Filter>Engine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Level\TileMap.h">
+      <Filter>Engine\Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +138,12 @@
     </Filter>
     <Filter Include="Game\Character">
       <UniqueIdentifier>{43f64a60-e42b-41de-9d32-819ef3070829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Physics">
+      <UniqueIdentifier>{9bf4759d-73f1-4b41-9c92-91340a74da55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Level">
+      <UniqueIdentifier>{8e1d92f2-8375-4dba-8167-4fe6906ddc32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-GameDemo::GameDemo()
+GameReborn::GameReborn()
     : Game{ "Reborn" }
     , m_Door{ 900, 600, 100, 200 }
     , m_MainCharacter{ ".\\Assets\\red_ball.bmp" }
@@ -29,9 +29,9 @@ GameDemo::GameDemo()
         1,1,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
         1,1,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
         1,1,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
-        1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
-        1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
-        1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
+        1,1,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
+        1,1,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
+        1,1,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
         1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
         1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
         1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
@@ -56,16 +56,14 @@ GameDemo::GameDemo()
         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1
     };
 
-    m_Map.load("Assets\\level\\tileset.png", { 32.f, 32.f }, level, 30, 30);
+    m_Map.load("Assets\\level\\tileset2.png", { 32.f, 32.f }, level, 30, 30);
 }
 
-GameDemo::~GameDemo()
+GameReborn::~GameReborn()
 {
 }
 
-#include <iostream>
-
-void GameDemo::Update(float deltaTime)
+void GameReborn::Update(float deltaTime)
 {
     m_InputManager->Update();
     m_PhysicsManager->Update();
@@ -92,7 +90,7 @@ void GameDemo::Update(float deltaTime)
     }
 }
 
-void GameDemo::Render(sf::RenderTarget& target)
+void GameReborn::Render(sf::RenderTarget& target)
 {
     target.clear(sf::Color(0, 0, 0));
     target.draw(m_Map);
@@ -113,7 +111,7 @@ void GameDemo::Render(sf::RenderTarget& target)
     }
 }
 
-void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
+void GameReborn::RenderDebugMenu(sf::RenderTarget& target)
 {
     ImGui::Begin("Debug Menu");
     ImGui::Text("Press F1 to close this debug menu");
@@ -174,7 +172,7 @@ void GameDemo::RenderDebugMenu(sf::RenderTarget& target)
     ImGui::End();
 }
 
-void GameDemo::addAnNPC(Character* npc)
+void GameReborn::addAnNPC(Character* npc)
 {
     m_Enemies.push_back(npc);
 }

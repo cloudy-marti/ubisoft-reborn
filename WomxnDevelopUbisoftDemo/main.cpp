@@ -1,6 +1,6 @@
 #include <stdafx.h>
 
-#include <Game/GameDemo.h>
+#include <Game/GameReborn.h>
 
 #include <Game/Character/Companion.h>
 
@@ -8,7 +8,7 @@
 
 int main()
 {
-    GameDemo game{};
+    GameReborn game{};
 
     sf::Music music;
     if (music.openFromFile("Assets/sound/pallet_town.wav"))

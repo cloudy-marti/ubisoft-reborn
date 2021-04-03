@@ -8,13 +8,13 @@
 #include "imgui-SFML.h"
 
 #include <Engine/Game.h>
-#include <Engine/Collision.h>
+#include <Engine/Physics/Collision.h>
 #include <Engine/Camera.h>
 #include <Engine/InputManager.h>
-#include <Engine/PhysicsEngine.h>
+#include <Engine/Physics/PhysicsEngine.h>
 #include <Engine/Math.h>
 
-#include <Game/GameDemo.h>
+#include <Game/GameReborn.h>
 #include <Game/Door.h>
 #include <Game/CollideableObject.h>
 

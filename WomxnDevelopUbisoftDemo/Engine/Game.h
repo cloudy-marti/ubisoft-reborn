@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Engine/InputManager.h>
-#include <Engine/PhysicsEngine.h>
+#include <Engine/Physics/PhysicsEngine.h>
 
 class Game
 {
