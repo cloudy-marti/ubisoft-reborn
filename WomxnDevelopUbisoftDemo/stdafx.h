@@ -22,4 +22,6 @@
 
 #include <Game/Character/Character.h>
 #include <Game/Character/MainCharacter.h>
+#include <Game/Character/Follower.h>
 #include <Game/Character/Companion.h>
+#include <Game/Character/Foe.h>

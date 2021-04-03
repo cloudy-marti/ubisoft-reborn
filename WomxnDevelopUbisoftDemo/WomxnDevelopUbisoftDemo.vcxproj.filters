@@ -50,9 +50,6 @@
     <ClCompile Include="Engine\InputManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Math.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Physics\Collision.cpp">
       <Filter>Engine\Physics</Filter>
     </ClCompile>
@@ -64,6 +61,18 @@
     </ClCompile>
     <ClCompile Include="Engine\Level\TileMap.cpp">
       <Filter>Engine\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Utils\Math.cpp">
+      <Filter>Engine\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Level\Level.cpp">
+      <Filter>Engine\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Character\Follower.cpp">
+      <Filter>Game\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Character\Foe.cpp">
+      <Filter>Game\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +116,6 @@
     <ClInclude Include="Engine\InputManager.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Math.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Physics\Collision.h">
       <Filter>Engine\Physics</Filter>
     </ClInclude>
@@ -121,6 +127,18 @@
     </ClInclude>
     <ClInclude Include="Engine\Level\TileMap.h">
       <Filter>Engine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utils\Math.h">
+      <Filter>Engine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Level\Level.h">
+      <Filter>Engine\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Character\Follower.h">
+      <Filter>Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Character\Foe.h">
+      <Filter>Game\Character</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +162,9 @@
     </Filter>
     <Filter Include="Engine\Level">
       <UniqueIdentifier>{8e1d92f2-8375-4dba-8167-4fe6906ddc32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utils">
+      <UniqueIdentifier>{52527a92-9d8e-43db-8a35-c41f7ef2a7b2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
