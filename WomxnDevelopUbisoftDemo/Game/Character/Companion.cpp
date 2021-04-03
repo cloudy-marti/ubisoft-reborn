@@ -52,6 +52,11 @@ void Companion::Update(float deltaTime)
 	m_Velocity.x = leaderPosition.x - m_Position.x;
 	m_Velocity.y = leaderPosition.y - m_Position.y;
 
+	/* Normalize velocity and use speed_max */
+	float vectorSize = pow(pow(m_Velocity.x, 2) + pow(m_Velocity.y, 2), 0.5);
+	m_Velocity /= vectorSize;
+	m_Velocity *= SPEED_MAX;
+
 	if (m_isCollidingRigidBody)
 	{
 		m_Position = m_OldPosition;
