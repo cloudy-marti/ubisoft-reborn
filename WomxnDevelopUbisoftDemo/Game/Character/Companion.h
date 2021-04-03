@@ -13,6 +13,8 @@ public:
 	void PetTheCompanion();
 	void HealLeader();
 
+	void Die() override;
+
 	void onCollision(const BoxCollideable&) override;
 	void CollidesRigidBody() override;
 

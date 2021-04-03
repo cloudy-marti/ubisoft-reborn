@@ -125,7 +125,16 @@ void MainCharacter::onCollision(const BoxCollideable& other)
         break;
     }
     case BoxCollideable::Tag::ENEMY:
+    {
+        m_Position -= m_Velocity;
+        m_HealthPoints -= 1.f;
         break;
+    }
+    case BoxCollideable::Tag::CHECKPOINT:
+    {
+        m_LastCheckPoint = other.GetCenter();
+        break;
+    }
     case BoxCollideable::Tag::WALL:
     {
         CollidesRigidBody();
@@ -135,6 +144,12 @@ void MainCharacter::onCollision(const BoxCollideable& other)
     default:
         break;
     }
+}
+
+void MainCharacter::Die()
+{
+    m_Position = m_LastCheckPoint;
+    m_HealthPoints = m_MaxHealthPoints;
 }
 
 // Use SPEED_MAX only if you want "just walking"

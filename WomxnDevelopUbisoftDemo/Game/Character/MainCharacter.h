@@ -13,13 +13,10 @@ public:
 	inline bool IsCameraSafe() const { return m_CameraSafe; }
 
 	void onCollision(const BoxCollideable&) override;
+	void Die() override;
 
 private:
 	void BindDirectionKeys();
-
-	//bool m_IsUsingJoystick;
-	//unsigned int m_JoystickIndex;
-	//bool m_WasButtonPressed;
 
 	bool m_IsOnSlipperyFloor;
 	bool m_CameraSafe;

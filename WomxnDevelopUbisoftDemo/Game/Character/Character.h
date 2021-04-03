@@ -17,6 +17,8 @@ public:
 
 	inline const float GetHP() const { return m_HealthPoints; }
 	inline void Heal(float hp) { m_HealthPoints = m_HealthPoints + hp <= m_MaxHealthPoints ? m_HealthPoints + hp : m_MaxHealthPoints; }
+	virtual void TakeDamage(float hp);
+	virtual void Die() = 0;
 
 	/* Debug: To be deleted */
 	inline std::string GetCoolDown()
@@ -40,6 +42,8 @@ protected:
 	sf::Vector2f m_Position;
 	sf::Vector2f m_OldPosition;
 	sf::Vector2f m_Velocity;
+
+	sf::Vector2f m_LastCheckPoint;
 
 	bool m_isCollidingRigidBody;
 

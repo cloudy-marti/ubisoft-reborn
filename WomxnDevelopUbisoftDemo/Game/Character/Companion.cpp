@@ -101,6 +101,12 @@ void Companion::HealLeader()
 	}
 }
 
+void Companion::Die()
+{
+	m_Position = m_LastCheckPoint;
+	m_HealthPoints = m_MaxHealthPoints;
+}
+
 void Companion::onCollision(const BoxCollideable& other)
 {
 	BoxCollideable::Tag tag = other.getTag();
@@ -117,6 +123,11 @@ void Companion::onCollision(const BoxCollideable& other)
 	case BoxCollideable::Tag::WALL:
 	{
 		CollidesRigidBody();
+		break;
+	}
+	case BoxCollideable::Tag::CHECKPOINT:
+	{
+		m_LastCheckPoint = other.GetCenter();
 		break;
 	}
 	case BoxCollideable::Tag::COMPANION:

@@ -3,6 +3,7 @@
 Character::Character(sf::Vector2f position, float factor, float hp, float max_hp, float cooldown, const std::string& filePath, BoxCollideable::Tag tag)
     : m_Position                { position }
     , m_OldPosition             { position }
+    , m_LastCheckPoint          { position }
     , m_isCollidingRigidBody    { false }
     , m_MaxHealthPoints         { max_hp }
     , m_HealthPoints            { hp }
@@ -31,4 +32,13 @@ void Character::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void Character::CollidesRigidBody()
 {
     m_isCollidingRigidBody = true;
+}
+
+void Character::TakeDamage(float hp)
+{
+    m_HealthPoints -= hp;
+    if (m_HealthPoints <= 0)
+    {
+        Die();
+    }
 }
