@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-Wall::Wall(float xCenterPos, float yCenterPos, float width, float height)
+CollideableObject::CollideableObject(float xCenterPos, float yCenterPos, float width, float height)
 	: m_rColor{ 0.8f }
 	, m_gColor{ 0.5f }
 	, m_bColor{ 1.0f }
@@ -10,7 +10,7 @@ Wall::Wall(float xCenterPos, float yCenterPos, float width, float height)
 	const auto size = sf::Vector2f(width, height);
 
 	m_BoundingBox.SetBoundingBox(center, size);
-	m_BoundingBox.BindOnCollisionFunc(*this, &Wall::onCollision);
+	m_BoundingBox.BindOnCollisionFunc(*this, &CollideableObject::onCollision);
 
 	m_Rectangle.setSize(size);
 	m_Rectangle.setOrigin(size * 0.5f);
@@ -21,7 +21,7 @@ Wall::Wall(float xCenterPos, float yCenterPos, float width, float height)
 	m_Rectangle.setOutlineColor(sf::Color{ static_cast<uint8_t>(m_rColor * 255.0f), static_cast<uint8_t>(m_gColor * 255.0f), static_cast<uint8_t>(m_bColor * 255.0f) });
 }
 
-Wall::Wall(const Wall& other)
+CollideableObject::CollideableObject(const CollideableObject& other)
 	: m_rColor      { other.m_rColor }
 	, m_gColor	    { other.m_gColor }
 	, m_bColor	    { other.m_bColor }
@@ -29,10 +29,10 @@ Wall::Wall(const Wall& other)
 	, m_BoundingBox { other.m_BoundingBox }
 {}
 
-Wall::~Wall()
+CollideableObject::~CollideableObject()
 {}
 
-void Wall::Update(float deltaTime)
+void CollideableObject::Update(float deltaTime)
 {
 	float colorDelta = 0.2f * deltaTime / 1000.0f;
 
@@ -42,7 +42,7 @@ void Wall::Update(float deltaTime)
 	m_Rectangle.setOutlineColor(sf::Color{ static_cast<uint8_t>(m_rColor * 255.0f), static_cast<uint8_t>(m_gColor * 255.0f), static_cast<uint8_t>(m_bColor * 255.0f) });
 }
 
-void Wall::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void CollideableObject::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(m_Rectangle);
+	//target.draw(m_Rectangle);
 }

@@ -6,7 +6,7 @@
 #include <Game/Door.h>
 #include <Game/Character/MainCharacter.h>
 #include <Game/Character/Companion.h>
-#include <Game/Wall.h>
+#include <Game/CollideableObject.h>
 #include <Engine/Camera.h>
 #include <TileMap.h>
 

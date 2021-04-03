@@ -16,7 +16,7 @@
 
 #include <Game/GameDemo.h>
 #include <Game/Door.h>
-#include <Game/Wall.h>
+#include <Game/CollideableObject.h>
 
 #include <Game/Character/Character.h>
 #include <Game/Character/MainCharacter.h>

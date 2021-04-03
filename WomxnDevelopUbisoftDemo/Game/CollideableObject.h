@@ -2,12 +2,12 @@
 
 #include <Engine/Collision.h>
 
-class Wall : public sf::Drawable//, public BoxCollideable
+class CollideableObject : public sf::Drawable//, public BoxCollideable
 {
 public:
-	Wall(float xCenterPos, float yCenterPos, float width, float height);
-	Wall(const Wall& other);
-	~Wall();
+	CollideableObject(float xCenterPos, float yCenterPos, float width, float height);
+	CollideableObject(const CollideableObject& other);
+	~CollideableObject();
 
 	void Update(float deltaTime);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

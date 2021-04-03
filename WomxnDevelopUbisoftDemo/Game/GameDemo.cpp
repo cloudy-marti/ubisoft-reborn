@@ -100,9 +100,9 @@ void GameDemo::Render(sf::RenderTarget& target)
     target.draw(m_MainCharacter);
     target.draw(m_Companion);
 
-    const std::vector<Wall*> walls = m_Map.getWalls();
+    const std::vector<CollideableObject*> walls = m_Map.getWalls();
 
-    for(Wall* w : walls)
+    for(CollideableObject* w : walls)
     {
         target.draw(*w);
     }

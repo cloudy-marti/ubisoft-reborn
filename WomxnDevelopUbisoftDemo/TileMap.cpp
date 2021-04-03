@@ -38,14 +38,19 @@ bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const int*
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
 
-            if (tileNumber != 0)
-            {
-                addWall(i * (tileSize.x+1), j * (tileSize.y+1), tileSize.x, tileSize.y);
-            }
+            ProcessMapTile(tileNumber, i, j, tileSize);
 		}
 	}
 
     return true;
+}
+
+void TileMap::ProcessMapTile(int tileNumber, size_t i, size_t j, sf::Vector2f tileSize)
+{
+    if (tileNumber != 0)
+    {
+        addCollideableObject(i * (tileSize.x + 1), j * (tileSize.y + 1), tileSize.x, tileSize.y);
+    }
 }
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -55,8 +60,13 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	target.draw(m_Vertices, states);
 }
 
-void TileMap::addWall(float xCenterPos, float yCenterPos, float width, float height)
+void TileMap::addCollideableObject(float xCenterPos, float yCenterPos, float width, float height)
 {
-    Wall* w = new Wall{ xCenterPos, yCenterPos, width, height };
+    CollideableObject* w = new CollideableObject{ xCenterPos, yCenterPos, width, height };
     m_Walls.push_back(w);
+}
+
+void TileMap::addTriggerableObject(sf::Vector2f center, float width, float height)
+{
+    // TODO
 }

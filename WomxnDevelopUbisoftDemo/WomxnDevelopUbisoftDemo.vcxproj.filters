@@ -32,7 +32,7 @@
     <ClCompile Include="Engine\Collision.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Wall.cpp">
+    <ClCompile Include="Game\CollideableObject.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Collectible.cpp">
@@ -92,7 +92,7 @@
     <ClInclude Include="Game\Collectible.h">
       <Filter>Game</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Wall.h">
+    <ClInclude Include="Game\CollideableObject.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Character\Companion.h">
