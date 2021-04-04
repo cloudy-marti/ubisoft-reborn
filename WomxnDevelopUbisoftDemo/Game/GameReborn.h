@@ -3,10 +3,10 @@
 #include <vector>
 
 #include <Engine/Game.h>
-#include <Game/Door.h>
+#include <Game/Object/Checkpoint.h>
 #include <Game/Character/MainCharacter.h>
 #include <Game/Character/Companion.h>
-#include <Game/CollideableObject.h>
+#include <Game/Object/CollideableObject.h>
 #include <Engine/Camera.h>
 #include <Engine/Level/TileMap.h>
 
@@ -33,7 +33,7 @@ private:
     sf::SoundBuffer m_EndgameSoundBuffer;
     sf::Sound m_EndgameSound;
 
-    Door m_Door;
+    Checkpoint m_Door;
 
     TileMap m_Map;
 

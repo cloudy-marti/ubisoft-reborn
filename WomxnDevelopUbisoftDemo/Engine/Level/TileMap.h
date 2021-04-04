@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Game/CollideableObject.h>
+#include <Game/Object/CollideableObject.h>
 
 class TileMap : public sf::Drawable, public sf::Transformable
 {

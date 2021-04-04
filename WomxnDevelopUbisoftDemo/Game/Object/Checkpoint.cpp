@@ -1,7 +1,7 @@
 #include <stdafx.h>
 
 
-Door::Door(float xCenterPos, float yCenterPos, float width, float height)
+Checkpoint::Checkpoint(float xCenterPos, float yCenterPos, float width, float height)
 	: m_IsPlayingEndGame{ false }
 	, m_rColor{ 0.0f }
 	, m_gColor{ 1.0f }
@@ -12,7 +12,7 @@ Door::Door(float xCenterPos, float yCenterPos, float width, float height)
 	const auto size = sf::Vector2f(width, height);
 
 	m_BoundingBox.SetBoundingBox(center, size);
-	m_BoundingBox.BindOnCollisionFunc(*this, &Door::onCollision);
+	m_BoundingBox.BindOnCollisionFunc(*this, &Checkpoint::onCollision);
 
 	m_Rectangle.setSize(size);
 	m_Rectangle.setOrigin(size * 0.5f);
@@ -23,11 +23,11 @@ Door::Door(float xCenterPos, float yCenterPos, float width, float height)
 	m_Rectangle.setOutlineColor(sf::Color{ static_cast<uint8_t>(m_rColor * 255.0f), static_cast<uint8_t>(m_gColor * 255.0f), static_cast<uint8_t>(m_bColor * 255.0f) });
 }
 
-Door::~Door()
+Checkpoint::~Checkpoint()
 {
 }
 
-void Door::Update(float deltaTime)
+void Checkpoint::Update(float deltaTime)
 {
 	if (!m_IsPlayingEndGame)
 	{
@@ -42,12 +42,12 @@ void Door::Update(float deltaTime)
 	m_Rectangle.setOutlineColor(sf::Color{ static_cast<uint8_t>(m_rColor * 255.0f), static_cast<uint8_t>(m_gColor * 255.0f), static_cast<uint8_t>(m_bColor * 255.0f) });
 }
 
-void Door::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Checkpoint::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(m_Rectangle);
 }
 
-void Door::StartEndGame()
+void Checkpoint::StartEndGame()
 {
 	m_IsPlayingEndGame = true;
 
@@ -56,12 +56,12 @@ void Door::StartEndGame()
 	m_bColor = 0.75f;
 }
 
-bool Door::IsEndGame() const
+bool Checkpoint::IsEndGame() const
 {
 	return m_IsPlayingEndGame;
 }
 
-void Door::onCollision(const BoxCollideable& other)
+void Checkpoint::onCollision(const BoxCollideable& other)
 {
 	BoxCollideable::Tag tag = other.getTag();
 

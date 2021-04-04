@@ -17,8 +17,8 @@
 #include <Engine/Level/Level.h>
 
 #include <Game/GameReborn.h>
-#include <Game/Door.h>
-#include <Game/CollideableObject.h>
+#include <Game/Object/Checkpoint.h>
+#include <Game/Object/CollideableObject.h>
 
 #include <Game/Character/Character.h>
 #include <Game/Character/MainCharacter.h>

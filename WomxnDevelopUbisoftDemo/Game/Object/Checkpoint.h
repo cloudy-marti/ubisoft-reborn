@@ -1,10 +1,10 @@
 #pragma once
 
-class Door : public sf::Drawable //, public BoxCollideable
+class Checkpoint : public sf::Drawable //, public BoxCollideable
 {
 public:
-	Door(float xCenterPos, float yCenterPos, float width, float height);
-	~Door();
+	Checkpoint(float xCenterPos, float yCenterPos, float width, float height);
+	~Checkpoint();
 
 	void Update(float deltaTime);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

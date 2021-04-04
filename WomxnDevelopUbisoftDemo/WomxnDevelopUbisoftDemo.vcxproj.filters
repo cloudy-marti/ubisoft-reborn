@@ -20,19 +20,10 @@
     <ClCompile Include="..\external\imgui-master\imgui_tables.cpp">
       <Filter>Engine\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Door.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Game.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Game\GameReborn.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\CollideableObject.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Collectible.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="Game\Character\Companion.cpp">
@@ -74,6 +65,15 @@
     <ClCompile Include="Game\Character\Foe.cpp">
       <Filter>Game\Character</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Object\Checkpoint.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\Collectible.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Object\CollideableObject.cpp">
+      <Filter>Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -86,19 +86,10 @@
     <ClInclude Include="..\external\imgui-sfml-master\imgui-SFML.h">
       <Filter>Engine\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Door.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Game.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="Game\GameReborn.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Collectible.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\CollideableObject.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Character\Companion.h">
@@ -140,6 +131,15 @@
     <ClInclude Include="Game\Character\Foe.h">
       <Filter>Game\Character</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Object\Checkpoint.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\Collectible.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Object\CollideableObject.h">
+      <Filter>Game\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -165,6 +165,9 @@
     </Filter>
     <Filter Include="Engine\Utils">
       <UniqueIdentifier>{52527a92-9d8e-43db-8a35-c41f7ef2a7b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Object">
+      <UniqueIdentifier>{a3c24cb7-53b5-4233-8df0-4196209f5042}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
