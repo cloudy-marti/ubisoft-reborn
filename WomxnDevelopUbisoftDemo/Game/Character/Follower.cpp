@@ -28,7 +28,8 @@ void Follower::Update(float deltaTime)
 		return;
 	}
 
-	m_IsAttachedToLeader = true;
+	ActionLeaderDetected();
+	
 	if (IsCloseToLeader())
 	{
 		ActionCloseToLeader();

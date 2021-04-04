@@ -16,6 +16,7 @@ public:
 	inline bool IsAttached() const { return m_IsAttachedToLeader; }
 
 	virtual void ActionCloseToLeader() = 0;
+	virtual void ActionLeaderDetected() = 0;
 
 	inline const double getDistanceToLeader() const { return m_DistanceToLeader; };
 

@@ -13,6 +13,7 @@ public:
 	void Die() override;
 
 	inline void ActionCloseToLeader() override { return; }
+	inline void ActionLeaderDetected() override { m_IsAttachedToLeader = true; }
 
 	void onCollision(const BoxCollideable&) override;
 	void CollidesRigidBody() override;
