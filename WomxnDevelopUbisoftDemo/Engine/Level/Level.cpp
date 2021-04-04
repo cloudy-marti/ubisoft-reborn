@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 Level::Level(const MainCharacter& mainCharacter, const Companion& companion, std::vector<Foe*>& enemies
-			, const std::string& tilesetPath, float tileSize, const int level[], size_t width, size_t height
+			, const std::string& tilesetPath, float tileSize, const std::vector<std::string>& level, size_t width, size_t height
 			, bool isEndLevel, const Level& nextLevel)
 	: m_MainCharacter	{ mainCharacter }
 	, m_Companion		{ companion }

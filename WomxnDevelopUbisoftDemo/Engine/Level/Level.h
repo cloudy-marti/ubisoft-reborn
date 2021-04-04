@@ -11,7 +11,7 @@
 class Level
 {
 public:
-	Level(const MainCharacter&, const Companion&, std::vector<Foe*>&, const std::string& , float, const int[], size_t, size_t, bool, const Level&);
+	Level(const MainCharacter&, const Companion&, std::vector<Foe*>&, const std::string& , float, const std::vector<std::string>&, size_t, size_t, bool, const Level&);
 	~Level();
 
 private:

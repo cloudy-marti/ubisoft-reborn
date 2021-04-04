@@ -2,7 +2,7 @@
 #include <string>
 
 Companion::Companion(Character& leader, const std::string& filePath)
-	: Follower{ { 800.f, 250.f }, 150.f, 3.f, 5.f, 3.f, filePath, BoxCollideable::Tag::COMPANION
+	: Follower{ { 900.f, 400.f }, 150.f, 3.f, 5.f, 3.f, filePath, BoxCollideable::Tag::COMPANION
 				, leader, 300.f, 50.f }
 {
 	InputManager* inputManager = InputManager::GetInstance();
@@ -50,7 +50,7 @@ void Companion::onCollision(const BoxCollideable& other)
 	{
 	case BoxCollideable::Tag::PLAYER:
 	{
-		CollidesRigidBody();
+		//CollidesRigidBody();
 		break;
 	}
 	case BoxCollideable::Tag::ENEMY:

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <iostream>
 
-bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const int* tiles, size_t width, size_t height)
+bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const std::vector<std::string>& tiles, size_t width, size_t height)
 {
 	if (!m_Tileset.loadFromFile(tileset))
 	{
@@ -17,7 +17,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const int*
 		for (size_t j = 0; j < height; ++j)
 		{
             // get the current tile number
-            int tileNumber = tiles[i + j * width];
+            int tileNumber = ProcessMapTileAndGetTileNumber(tiles, i, j, width, tileSize);
 
             // find its position in the tileset texture
             int tu = tileNumber % (m_Tileset.getSize().x / static_cast<int>(tileSize.x));
@@ -37,20 +37,24 @@ bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const int*
             quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);
             quad[2].texCoords = sf::Vector2f((tu + 1) * tileSize.x, (tv + 1) * tileSize.y);
             quad[3].texCoords = sf::Vector2f(tu * tileSize.x, (tv + 1) * tileSize.y);
-
-            ProcessMapTile(tileNumber, i, j, tileSize);
 		}
 	}
 
     return true;
 }
 
-void TileMap::ProcessMapTile(int tileNumber, size_t i, size_t j, sf::Vector2f tileSize)
+int TileMap::ProcessMapTileAndGetTileNumber(const std::vector<std::string>& tiles, size_t i, size_t j, size_t width, sf::Vector2f tileSize)
 {
-    if (tileNumber != 0)
+    int tileNumber;
+    std::string tmp = tiles[i + j * width];
+
+    tileNumber = std::stoi(tmp);
+
+    if (tileNumber > 1 && std::isdigit(tmp.back()))
     {
         addCollideableObject(i * (tileSize.x + 1), j * (tileSize.y + 1), tileSize.x, tileSize.y);
     }
+    return tileNumber;
 }
 
 void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const

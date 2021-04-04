@@ -3,7 +3,7 @@
 using namespace sf;
 
 MainCharacter::MainCharacter(const std::string& filePath)
-    : Character{ { 250.f, 250.f }, 150.f, 3.f, 15.f, 0.f, filePath, BoxCollideable::Tag::PLAYER }
+    : Character{ { 400.f, 400.f }, 150.f, 3.f, 15.f, 0.f, filePath, BoxCollideable::Tag::PLAYER }
     , m_IsPlayingEndGame    { false }
     , m_IsOnSlipperyFloor   { false }
     , m_CameraSafe          { false }
@@ -61,7 +61,7 @@ void MainCharacter::onCollision(const BoxCollideable& other)
     {
     case BoxCollideable::Tag::COMPANION:
     {
-        CollidesRigidBody();
+        //CollidesRigidBody();
         break;
     }
     case BoxCollideable::Tag::ENEMY:
