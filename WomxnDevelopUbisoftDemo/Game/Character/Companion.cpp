@@ -1,5 +1,4 @@
 #include <stdafx.h>
-#include <string>
 
 Companion::Companion(Character& leader, const std::string& filePath)
 	: Follower{ { 900.f, 400.f }, 150.f, 3.f, 5.f, 3.f, filePath, BoxCollideable::Tag::COMPANION
@@ -71,7 +70,7 @@ void Companion::onCollision(const BoxCollideable& other)
 	}
 }
 
-void Companion::CollidesRigidBody()
-{
-	Character::CollidesRigidBody();
-}
+//void Companion::CollidesRigidBody()
+//{
+//	Character::CollidesRigidBody();
+//}

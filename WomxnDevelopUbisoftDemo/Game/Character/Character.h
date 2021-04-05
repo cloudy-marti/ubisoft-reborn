@@ -2,6 +2,9 @@
 
 #include <string>
 
+#include <Engine/Physics/BoxCollideable.h>
+
+#include <iostream>
 class Character : public sf::Drawable
 {
 public:
@@ -19,6 +22,10 @@ public:
 	inline void Heal(float hp) { m_HealthPoints = m_HealthPoints + hp <= m_MaxHealthPoints ? m_HealthPoints + hp : m_MaxHealthPoints; }
 	virtual void TakeDamage(float hp);
 	virtual void Die() = 0;
+
+	void setPosition(sf::Vector2f position);
+
+	void SetNewTexture(const std::string&);
 
 	/* Debug: To be deleted */
 	inline std::string GetCoolDown()

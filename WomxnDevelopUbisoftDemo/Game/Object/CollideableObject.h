@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Engine/Physics/Collision.h>
+#include <Engine/Physics/BoxCollideable.h>
 
 class CollideableObject : public sf::Drawable//, public BoxCollideable
 {

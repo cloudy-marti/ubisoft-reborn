@@ -66,8 +66,7 @@ void MainCharacter::onCollision(const BoxCollideable& other)
     }
     case BoxCollideable::Tag::ENEMY:
     {
-        m_Position -= m_Velocity;
-        m_HealthPoints -= 1.f;
+        CollidesRigidBody();
         break;
     }
     case BoxCollideable::Tag::CHECKPOINT:

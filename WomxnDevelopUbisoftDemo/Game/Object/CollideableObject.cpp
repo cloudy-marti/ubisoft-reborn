@@ -44,5 +44,5 @@ void CollideableObject::Update(float deltaTime)
 
 void CollideableObject::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	//target.draw(m_Rectangle);
+	target.draw(m_Rectangle);
 }

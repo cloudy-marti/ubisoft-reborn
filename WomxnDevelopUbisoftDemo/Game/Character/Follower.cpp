@@ -42,7 +42,7 @@ void Follower::Update(float deltaTime)
 	m_Velocity.y = leaderPosition.y - m_Position.y;
 
 	/* Normalize velocity and use speed_max */
-	float vectorSize = pow(pow(m_Velocity.x, 2) + pow(m_Velocity.y, 2), 0.5);
+	float vectorSize = static_cast<float>(pow(pow(m_Velocity.x, 2) + pow(m_Velocity.y, 2), 0.5));
 	m_Velocity /= vectorSize;
 	m_Velocity *= m_MaxSpeed;
 

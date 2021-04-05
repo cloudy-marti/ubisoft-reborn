@@ -43,3 +43,15 @@ void Character::TakeDamage(float hp)
         Die();
     }
 }
+
+void Character::setPosition(sf::Vector2f position)
+{
+    m_Position = position;
+    m_Sprite.setPosition(m_Position);
+    m_BoundingBox.SetCenter(m_Position);
+}
+void Character::SetNewTexture(const std::string& path)
+{
+    m_Texture.loadFromFile(path);
+    m_Sprite.setTexture(m_Texture);
+}

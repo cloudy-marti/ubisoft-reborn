@@ -16,7 +16,7 @@ public:
 	inline void ActionLeaderDetected() override { m_IsAttachedToLeader = true; }
 
 	void onCollision(const BoxCollideable&) override;
-	void CollidesRigidBody() override;
+	//void CollidesRigidBody() override;
 
 protected:
 private:

@@ -3,13 +3,13 @@
 // class forwarding to avoid diamond inclusion
 class BoxCollideable;
 
-class PhysicsEngine
+class PhysicsEngine : public Manager
 {
 public:
 	static PhysicsEngine* GetInstance();
 	void RegisterCollider(BoxCollideable*);
 
-	void Update();
+	void Update() override;
 
 	std::vector<BoxCollideable*> m_Colliders;
 private:
