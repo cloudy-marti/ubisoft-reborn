@@ -106,6 +106,15 @@ void GameReborn::RenderDebugMenu(sf::RenderTarget& target)
 
     const auto& mainCharCenterPos = m_MainCharacter.GetCenter();
     const auto& charCenterPos = m_Companion.GetCenter();
+
+    if (ImGui::CollapsingHeader("Inputs"))
+    {
+        ImGui::Text("Keyboard Layout: %s (toggle with F3)", m_InputManager->GetKeyboardLayout().c_str());
+        ImGui::Text("Walk with WASD/ZQSD/Arrows");
+        ImGui::Text("A: Companion heals");
+        ImGui::Text("Space: Companion barks (useless)");
+        ImGui::Text("+/-: Zoom in / Zoom out");
+    }
     
     if (ImGui::CollapsingHeader("Main character status"))
     {
@@ -113,10 +122,11 @@ void GameReborn::RenderDebugMenu(sf::RenderTarget& target)
         ImGui::Text("Y: %f", mainCharCenterPos.y);
 
         ImGui::Text("HP: %f", m_MainCharacter.GetHP());
+        ImGui::Text("Has sword: %s", m_MainCharacter.HasSword() ? "yes" : "no");
     }
 
     if (ImGui::CollapsingHeader("Companion status"))
-    {
+    {            
         ImGui::Text("X: %f", charCenterPos.x);
         ImGui::Text("Y: %f", charCenterPos.y);
 
@@ -150,7 +160,8 @@ void GameReborn::RenderDebugMenu(sf::RenderTarget& target)
 
     if (ImGui::CollapsingHeader("Game status"))
     {
-        ImGui::Text("Keyboard Layout: %s", m_InputManager->GetKeyboardLayout().c_str());
+        ImGui::Text("Level: %d", m_LevelManager->m_Level);
+        
         if (m_IsFinished)
         {
             ImGui::TextColored(ImVec4(255.f, 0.f, 0.f, 1.f), "GAME ENDED");
