@@ -1,8 +1,7 @@
 #include "stdafx.h"
-#include <iostream>
 
 bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const std::vector<std::string>& tiles, size_t width, size_t height
-    , MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies)
+    , MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*>& checkpoints)
 {
 	if (!m_Tileset.loadFromFile(tileset))
 	{
@@ -18,7 +17,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const std:
 		for (size_t j = 0; j < height; ++j)
 		{
             // get the current tile number
-            int tileNumber = ProcessMapTileAndGetTileNumber(tiles, i, j, width, tileSize, player, companion, enemies);
+            int tileNumber = ProcessMapTileAndGetTileNumber(tiles, i, j, width, tileSize, player, companion, enemies, checkpoints);
 
             // find its position in the tileset texture
             int tu = tileNumber % (m_Tileset.getSize().x / static_cast<int>(tileSize.x));
@@ -52,7 +51,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const std:
  * x -> Checkpoint
  **/
 int TileMap::ProcessMapTileAndGetTileNumber(const std::vector<std::string>& tiles, size_t i, size_t j, size_t width, sf::Vector2f tileSize
-    , MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies)
+    , MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*>& checkpoints)
 {
     std::string tmp = tiles[i + j * width];
     int tileNumber = std::stoi(tmp);
@@ -82,6 +81,8 @@ int TileMap::ProcessMapTileAndGetTileNumber(const std::vector<std::string>& tile
         }
         case 'x':
         {
+            Checkpoint* c = new Checkpoint{ position.x, position.y, tileSize.x, tileSize.y };
+            checkpoints.push_back(c);
             break;
         }
         default:
@@ -89,9 +90,9 @@ int TileMap::ProcessMapTileAndGetTileNumber(const std::vector<std::string>& tile
         }
     }
 
-    m_Walls.clear();
+    //m_Walls.clear();
     // add collideable boxes for walls
-    if (tileNumber > 1 && std::isdigit(tmp.back()))
+    if (tileNumber > 1 && tileNumber != 7 && std::isdigit(tmp.back()))
     {
         addCollideableObject(i * (tileSize.x + 1), j * (tileSize.y + 1), tileSize.x, tileSize.y);
     }
@@ -108,7 +109,7 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void TileMap::addCollideableObject(float xCenterPos, float yCenterPos, float width, float height)
 {
     CollideableObject* w = new CollideableObject{ xCenterPos, yCenterPos, width, height };
-    m_Walls.push_back(w);
+    //m_Walls.push_back(w);
 }
 
 void TileMap::addTriggerableObject(sf::Vector2f center, float width, float height)

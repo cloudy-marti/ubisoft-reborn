@@ -11,10 +11,9 @@
 class Level
 {
 public:
-	Level(MainCharacter&, Companion&, std::vector<Foe*>&, const std::string& , float, const std::vector<std::string>&, size_t, size_t, bool, bool);
+	Level(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&
+		, const std::string&, float, const std::vector<std::string>&, size_t, size_t, bool, bool);
 	~Level();
-
-	//void LoadLevel(const std::string& filepath, const std::string& map);
 
 	inline bool IsStartLevel() const { return m_StartLevel; }
 	inline bool IsEndLevel() const { return m_EndLevel; }

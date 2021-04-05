@@ -11,19 +11,23 @@ class LevelManager : public Manager
 public:
 	static LevelManager* GetInstance();
 
-	TileMap LoadFirstLevel(MainCharacter&, Companion&, std::vector<Foe*>&);
-	TileMap LoadSecondLevel(MainCharacter&, Companion&, std::vector<Foe*>&);
-	TileMap LoadThirdLevel(MainCharacter&, Companion&, std::vector<Foe*>&);
+	TileMap LoadLevel_1(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&);
+	TileMap LoadLevel_2(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&);
+	TileMap LoadLevel_3(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&);
+	//TileMap LoadLevel_4(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&);
 	
 	void Update() override;
 
+	// TODO this is not the right way
+	bool m_ReadyForSecondMap = false;
+	bool m_ReadyForThirdMap = false;
+	int m_Level = 0;
 private:
 	LevelManager();
 	static LevelManager* _Instance;
 
-	TileMap LoadLevel(MainCharacter&, Companion&, std::vector<Foe*>&, const std::string&, const std::vector<std::string>&, const std::string&);
-	std::vector<Level*> m_Level_1;
-
+	[[nodiscard]] TileMap LoadLevel(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&, const std::string&, const std::vector<std::string>&, const std::string&, bool, bool);
+	
 	class Level_1
 	{
 	public:

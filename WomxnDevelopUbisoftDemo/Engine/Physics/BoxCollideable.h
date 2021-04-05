@@ -12,7 +12,7 @@ public:
         PLAYER,
         COMPANION,
         ENEMY,
-        TRIGGER,
+        LEVEL_TRIGGER,
         CHECKPOINT,
         WALL,
         HOLE
