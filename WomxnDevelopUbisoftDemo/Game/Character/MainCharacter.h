@@ -7,7 +7,7 @@ class MainCharacter : public Character
 public:	
 	MainCharacter(const std::string&);
 	void Update(float) override;
-	void StartEndGame();
+	//void StartEndGame();
 
 	inline bool IsCollidingWall() const { return m_isCollidingRigidBody; }
 	inline bool IsCameraSafe() const { return m_CameraSafe; }
@@ -15,10 +15,18 @@ public:
 	void onCollision(const BoxCollideable&) override;
 	void Die() override;
 
+	//inline bool StillHasToDie() const { return m_YetToDie; }
+
+	bool m_HasDiedOnce = false;
+	bool m_SteppedOnCheckPoint = false;
+
+	inline bool HasSword() const { return m_HasSword; }
+
 private:
 	void BindDirectionKeys();
 
-	bool m_IsOnSlipperyFloor;
+	bool m_HasSword = false;
+
 	bool m_CameraSafe;
 	bool m_IsPlayingEndGame;
 

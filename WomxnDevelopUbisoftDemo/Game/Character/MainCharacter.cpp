@@ -72,56 +72,34 @@ void MainCharacter::onCollision(const BoxCollideable& other)
 
 void MainCharacter::Die()
 {
-    m_Position = m_LastCheckPoint;
-    m_HealthPoints = m_MaxHealthPoints;
-}
-
-// Use SPEED_MAX only if you want "just walking"
-// Uncomment SlowDown rate on Update function if you need a smoother walking speed
-inline void MainCharacter::GoRight()
-{
-    if (!m_IsOnSlipperyFloor)
+    if (m_HasDiedOnce)
     {
-        m_Velocity.x = m_MaxSpeed;
+        m_Position = m_LastCheckPoint;
     }
     else
     {
-        m_Velocity.x = fmin(m_Velocity.x + SPEED_INC, m_MaxSpeed);
+        m_HasDiedOnce = true;
+        m_HasSword = true;
     }
+    m_HealthPoints = m_MaxHealthPoints;
+}
+
+inline void MainCharacter::GoRight()
+{
+    m_Velocity.x = m_MaxSpeed;
 }
 
 inline void MainCharacter::GoLeft()
 {
-    if (!m_IsOnSlipperyFloor)
-    {
-        m_Velocity.x = -m_MaxSpeed;
-    }
-    else
-    {
-        m_Velocity.x = fmax(m_Velocity.x - SPEED_INC, -m_MaxSpeed);
-    }
+    m_Velocity.x = -m_MaxSpeed;
 }
 
 inline void MainCharacter::GoDown()
 {
-    if (!m_IsOnSlipperyFloor)
-    {
-        m_Velocity.y = m_MaxSpeed;
-    }
-    else
-    {
-        m_Velocity.y = fmin(m_Velocity.y + SPEED_INC, m_MaxSpeed);
-    }
+    m_Velocity.y = m_MaxSpeed;
 }
 
 inline void MainCharacter::GoUp()
 {
-    if (!m_IsOnSlipperyFloor)
-    {
-        m_Velocity.y = -m_MaxSpeed;
-    }
-    else
-    {
-        m_Velocity.y = fmax(m_Velocity.y - SPEED_INC, -m_MaxSpeed);
-    }
+    m_Velocity.y = -m_MaxSpeed;
 }
