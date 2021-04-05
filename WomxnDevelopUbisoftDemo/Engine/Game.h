@@ -2,6 +2,7 @@
 
 #include <Engine/InputManager.h>
 #include <Engine/Physics/PhysicsEngine.h>
+#include <Engine/Level/LevelManager.h>
 
 class Game
 {
@@ -18,8 +19,9 @@ protected:
 
     sf::RenderWindow m_Window;
 
-    InputManager* m_InputManager;
-    PhysicsEngine* m_PhysicsManager;
+    InputManager*   m_InputManager;
+    PhysicsEngine*  m_PhysicsManager;
+    LevelManager*   m_LevelManager;
 
 private:
 };

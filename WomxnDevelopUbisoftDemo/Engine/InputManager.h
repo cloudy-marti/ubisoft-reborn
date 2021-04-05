@@ -1,12 +1,13 @@
 #pragma once
 
-#include <map>
+//#include <map>
 #include <functional>
+#include <Engine/Manager.h>
 
 template<class T>
 using InputCallback = void(T::*)();
 
-class InputManager
+class InputManager : public Manager
 {
 public:
 	enum class Layout
@@ -31,7 +32,7 @@ public:
 	}
 	bool RemoveKey(const sf::Keyboard::Key&);
 
-	void Update();
+	void Update() override;
 
 	void ToggleKeyboardLayout();
 	std::string GetKeyboardLayout() const;

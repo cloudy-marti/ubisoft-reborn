@@ -13,6 +13,7 @@ Game::Game(const char* windowTitle)
 
     m_InputManager = InputManager::GetInstance();
     m_PhysicsManager = PhysicsEngine::GetInstance();
+    m_LevelManager = LevelManager::GetInstance();
 }
 
 Game::~Game()

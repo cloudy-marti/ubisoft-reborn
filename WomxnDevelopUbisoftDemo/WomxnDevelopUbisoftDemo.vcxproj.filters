@@ -41,7 +41,7 @@
     <ClCompile Include="Engine\InputManager.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Physics\Collision.cpp">
+    <ClCompile Include="Engine\Physics\BoxCollideable.cpp">
       <Filter>Engine\Physics</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Physics\PhysicsEngine.cpp">
@@ -73,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="Game\Object\CollideableObject.cpp">
       <Filter>Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\LevelDesign\Level_1.cpp">
+      <Filter>Game\LevelDesign</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,7 +110,7 @@
     <ClInclude Include="Engine\InputManager.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Physics\Collision.h">
+    <ClInclude Include="Engine\Physics\BoxCollideable.h">
       <Filter>Engine\Physics</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Physics\PhysicsEngine.h">
@@ -140,6 +143,9 @@
     <ClInclude Include="Game\Object\CollideableObject.h">
       <Filter>Game\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Manager.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -168,6 +174,9 @@
     </Filter>
     <Filter Include="Game\Object">
       <UniqueIdentifier>{a3c24cb7-53b5-4233-8df0-4196209f5042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\LevelDesign">
+      <UniqueIdentifier>{dfcf0837-145a-4c33-8a5d-7ee135839264}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

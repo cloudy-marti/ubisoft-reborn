@@ -8,17 +8,22 @@
 #include "imgui-SFML.h"
 
 #include <Engine/Game.h>
-#include <Engine/Physics/Collision.h>
 #include <Engine/Camera.h>
+#include <Engine/Manager.h>
 #include <Engine/InputManager.h>
+
+#include <Engine/Physics/BoxCollideable.h>
 #include <Engine/Physics/PhysicsEngine.h>
-#include <Engine/Utils/Math.h>
+
 #include <Engine/Level/LevelManager.h>
 #include <Engine/Level/Level.h>
 
+#include <Engine/Utils/Math.h>
+
 #include <Game/GameReborn.h>
-#include <Game/Object/Checkpoint.h>
+
 #include <Game/Object/CollideableObject.h>
+#include <Game/Object/Checkpoint.h>
 
 #include <Game/Character/Character.h>
 #include <Game/Character/MainCharacter.h>

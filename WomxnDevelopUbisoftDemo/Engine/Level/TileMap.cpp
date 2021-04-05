@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include <iostream>
 
-bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const std::vector<std::string>& tiles, size_t width, size_t height)
+bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const std::vector<std::string>& tiles, size_t width, size_t height
+    , MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies)
 {
 	if (!m_Tileset.loadFromFile(tileset))
 	{
@@ -17,7 +18,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const std:
 		for (size_t j = 0; j < height; ++j)
 		{
             // get the current tile number
-            int tileNumber = ProcessMapTileAndGetTileNumber(tiles, i, j, width, tileSize);
+            int tileNumber = ProcessMapTileAndGetTileNumber(tiles, i, j, width, tileSize, player, companion, enemies);
 
             // find its position in the tileset texture
             int tu = tileNumber % (m_Tileset.getSize().x / static_cast<int>(tileSize.x));
@@ -43,13 +44,53 @@ bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const std:
     return true;
 }
 
-int TileMap::ProcessMapTileAndGetTileNumber(const std::vector<std::string>& tiles, size_t i, size_t j, size_t width, sf::Vector2f tileSize)
+/**
+ * : -> No collision (should be the contrary)
+ * p -> Player
+ * c -> Companion
+ * f -> Enemy
+ * x -> Checkpoint
+ **/
+int TileMap::ProcessMapTileAndGetTileNumber(const std::vector<std::string>& tiles, size_t i, size_t j, size_t width, sf::Vector2f tileSize
+    , MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies)
 {
-    int tileNumber;
     std::string tmp = tiles[i + j * width];
+    int tileNumber = std::stoi(tmp);
 
-    tileNumber = std::stoi(tmp);
+    // update character positions and create enemies
+    if (!std::isdigit(tmp.back()))
+    {
+        char c = tmp.back();
+        sf::Vector2f position{ i * tileSize.x, j * tileSize.y };
+        switch (c)
+        {
+        case 'p':
+        {
+            player.setPosition(position);
+            break;
+        }
+        case 'c':
+        {
+            companion.setPosition(position);
+            break;
+        }
+        case 'f':
+        {
+            Foe* f = new Foe{ position, player, ".\\Assets\\red_ball.bmp" };
+            enemies.push_back(f);
+            break;
+        }
+        case 'x':
+        {
+            break;
+        }
+        default:
+            break;
+        }
+    }
 
+    m_Walls.clear();
+    // add collideable boxes for walls
     if (tileNumber > 1 && std::isdigit(tmp.back()))
     {
         addCollideableObject(i * (tileSize.x + 1), j * (tileSize.y + 1), tileSize.x, tileSize.y);
