@@ -3,9 +3,8 @@
 using namespace sf;
 
 MainCharacter::MainCharacter(const std::string& filePath)
-    : Character{ { 400.f, 400.f }, 150.f, 3.f, 15.f, 0.f, filePath, BoxCollideable::Tag::PLAYER }
+    : Character{ { 400.f, 400.f }, 150.f, 3.f, 7.f, 0.f, filePath, BoxCollideable::Tag::PLAYER }
     , m_IsPlayingEndGame    { false }
-    , m_IsOnSlipperyFloor   { false }
     , m_CameraSafe          { false }
 {
     BindDirectionKeys();
@@ -48,30 +47,15 @@ void MainCharacter::Update(float deltaTime)
     m_Velocity = { 0.f, 0.f };
 }
 
-void MainCharacter::StartEndGame()
-{
-    m_IsPlayingEndGame = true;
-}
-
 void MainCharacter::onCollision(const BoxCollideable& other)
 {
     BoxCollideable::Tag tag = other.getTag();
 
     switch (tag)
     {
-    case BoxCollideable::Tag::COMPANION:
-    {
-        //CollidesRigidBody();
-        break;
-    }
-    case BoxCollideable::Tag::ENEMY:
-    {
-        CollidesRigidBody();
-        break;
-    }
     case BoxCollideable::Tag::CHECKPOINT:
     {
-        m_LastCheckPoint = other.GetCenter();
+        m_SteppedOnCheckPoint = true;
         break;
     }
     case BoxCollideable::Tag::WALL:
@@ -79,7 +63,8 @@ void MainCharacter::onCollision(const BoxCollideable& other)
         CollidesRigidBody();
         break;
     }
-    case BoxCollideable::Tag::PLAYER:
+    case BoxCollideable::Tag::COMPANION:
+    case BoxCollideable::Tag::ENEMY:
     default:
         break;
     }

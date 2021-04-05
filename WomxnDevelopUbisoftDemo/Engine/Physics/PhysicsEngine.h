@@ -1,6 +1,5 @@
 #pragma once
 
-// class forwarding to avoid diamond inclusion
 class BoxCollideable;
 
 class PhysicsEngine : public Manager

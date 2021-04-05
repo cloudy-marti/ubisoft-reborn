@@ -17,10 +17,10 @@ Level::~Level()
 {
 }
 
-void Level::SetEnemiesTexture(const std::string& texturePath)
+void Level::SetEnemiesTexture(const std::string& texturePath, std::vector<Foe*>& enemies)
 {
-	for (Foe* enemy : m_Enemies)
+	for (Foe* enemy : enemies)
 	{
-		enemy->SetNewTexture(texturePath);
+		enemy->SetTexture(texturePath);
 	}
 }

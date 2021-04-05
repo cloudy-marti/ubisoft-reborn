@@ -2,7 +2,6 @@
 
 GameReborn::GameReborn()
     : Game{ "Reborn" }
-    //, m_Door{ 900, 600, 100, 200 }
     , m_MainCharacter{ ".\\Assets\\character\\issoucrusade.bmp" }
     , m_Companion{ m_MainCharacter, ".\\Assets\\character\\pup.bmp" }
     , m_MainCamera{ m_Window.getDefaultView() }

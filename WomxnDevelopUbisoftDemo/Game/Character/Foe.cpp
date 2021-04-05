@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 Foe::Foe(sf::Vector2f position, Character& leader, const std::string& filePath)
-	: Follower { position, 150.f, 1.f, 1.f, 1.5f, filePath, BoxCollideable::Tag::ENEMY, leader, 150.f, 150.f }
+	: Follower { position, 100.f, 1.f, 1.f, 1.5f, filePath, BoxCollideable::Tag::ENEMY, leader, 150.f, 30.f }
 {
 	m_BoundingBox.BindOnCollisionFunc(*this, &Foe::onCollision);
 

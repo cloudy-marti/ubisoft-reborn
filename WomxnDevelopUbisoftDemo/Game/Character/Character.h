@@ -25,7 +25,7 @@ public:
 
 	void setPosition(sf::Vector2f position);
 
-	void SetNewTexture(const std::string&);
+	void SetTexture(const std::string&);
 
 	/* Debug: To be deleted */
 	inline std::string GetCoolDown()
