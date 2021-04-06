@@ -15,6 +15,7 @@ public:
 	void addCollideableObject(float xCenterPos, float yCenterPos, float width, float height);
 	void addTriggerableObject(sf::Vector2f center, float width, float height);
 
+	// useful for debug
 	//inline const std::vector<CollideableObject*> getWalls() const { return m_Walls; }
 
 private:
@@ -26,6 +27,7 @@ private:
 	sf::VertexArray m_Vertices;
 	sf::Texture m_Tileset;
 
+	// useful for debug
 	//std::vector<CollideableObject*> m_Walls;
 };
 

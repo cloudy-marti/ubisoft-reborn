@@ -92,6 +92,12 @@ void GameReborn::Render(sf::RenderTarget& target)
         target.draw(*enemy);
     }
 
+    // for debug only
+    //for (auto wall : m_Map.getWalls())
+    //{
+    //    target.draw(*wall);
+    //}
+
     if (m_IsFinished)
     {
         target.draw(m_EndgameText);

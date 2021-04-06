@@ -56,13 +56,18 @@ int TileMap::ProcessMapTileAndGetTileNumber(const std::vector<std::string>& tile
     std::string tmp = tiles[i + j * width];
     int tileNumber = std::stoi(tmp);
 
-    // update character positions and create enemies
+    // process special tiles
     if (!std::isdigit(tmp.back()))
     {
         char c = tmp.back();
         sf::Vector2f position{ i * tileSize.x, j * tileSize.y };
         switch (c)
         {
+        case ':':
+        {
+            addCollideableObject(i * (tileSize.x + 1), j * (tileSize.y + 1), tileSize.x, tileSize.y);
+            break;
+        }
         case 'p':
         {
             player.setPosition(position);
@@ -90,12 +95,6 @@ int TileMap::ProcessMapTileAndGetTileNumber(const std::vector<std::string>& tile
         }
     }
 
-    //m_Walls.clear();
-    // add collideable boxes for walls
-    if (tileNumber > 1 && tileNumber != 7 && std::isdigit(tmp.back()))
-    {
-        addCollideableObject(i * (tileSize.x + 1), j * (tileSize.y + 1), tileSize.x, tileSize.y);
-    }
     return tileNumber;
 }
 
@@ -109,6 +108,7 @@ void TileMap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 void TileMap::addCollideableObject(float xCenterPos, float yCenterPos, float width, float height)
 {
     CollideableObject* w = new CollideableObject{ xCenterPos, yCenterPos, width, height };
+    // useful for debug
     //m_Walls.push_back(w);
 }
 
