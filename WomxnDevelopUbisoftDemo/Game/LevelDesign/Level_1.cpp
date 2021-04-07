@@ -122,3 +122,21 @@ const std::vector<std::string> LevelManager::Level_1::Level_1_Map_3
     "2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2",
     "2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2","2"
 };
+
+TileMap LevelManager::Level_1::LoadLevel_1(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*>& checkpoints)
+{
+    m_Event = 1;
+    return LevelManager::GetInstance()->LoadLevel(player, companion, enemies, checkpoints, Level_1::Level_1_Tileset, Level_1::Level_1_Map_1, Level_1::Level_1_Foe_Texture, true, false);
+}
+
+TileMap LevelManager::Level_1::LoadLevel_2(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*>& checkpoints)
+{
+    m_Event = 2;
+    return LevelManager::GetInstance()->LoadLevel(player, companion, enemies, checkpoints, Level_1::Level_1_Tileset, Level_1::Level_1_Map_2, Level_1::Level_1_Foe_Texture, false, false);
+}
+
+TileMap LevelManager::Level_1::LoadLevel_3(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*>& checkpoints)
+{
+    m_Event = 3;
+    return LevelManager::GetInstance()->LoadLevel(player, companion, enemies, checkpoints, Level_1::Level_1_Tileset, Level_1::Level_1_Map_3, Level_1::Level_1_Foe_Texture, false, true);
+}

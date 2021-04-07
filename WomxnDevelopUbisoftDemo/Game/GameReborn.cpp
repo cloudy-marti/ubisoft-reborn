@@ -20,7 +20,7 @@ GameReborn::GameReborn()
 
     m_Window.setView(m_MainCamera.getView());
 
-    m_Map = m_LevelManager->LoadLevel_1(m_MainCharacter, m_Companion, m_Enemies, m_Checkpoints);
+    m_LevelManager->LoadFirstLevel(m_MainCharacter, m_Companion, m_Enemies, m_Checkpoints, m_Map);
 }
 
 GameReborn::~GameReborn()
@@ -48,19 +48,9 @@ void GameReborn::Update(float deltaTime)
         m_Window.setView(m_MainCamera.getView());
     }
 
-    // TODO
-    if (m_LevelManager->m_Level == 1 && m_MainCharacter.m_SteppedOnCheckPoint)
+    m_LevelManager->LoadFirstLevel(m_MainCharacter, m_Companion, m_Enemies, m_Checkpoints, m_Map);
+    if (m_LevelManager->m_EndGame)
     {
-        m_MainCharacter.m_SteppedOnCheckPoint = false;
-        m_Map = m_LevelManager->LoadLevel_2(m_MainCharacter, m_Companion, m_Enemies, m_Checkpoints);
-    }
-    else if (m_LevelManager->m_Level == 2 && m_MainCharacter.m_HasDiedOnce)
-    {
-        m_Map = m_LevelManager->LoadLevel_3(m_MainCharacter, m_Companion, m_Enemies, m_Checkpoints);
-    }
-    else if (m_LevelManager->m_Level == 3 && m_MainCharacter.m_SteppedOnCheckPoint && m_Companion.IsAttached() /*&& m_Enemies.empty()*/)
-    {
-        m_MainCharacter.m_SteppedOnCheckPoint = false;
         StartEndGame();
     }
 

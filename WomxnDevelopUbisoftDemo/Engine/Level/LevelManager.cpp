@@ -25,24 +25,24 @@ LevelManager* LevelManager::GetInstance()
     return map_1->GetMap();
 }
 
-TileMap LevelManager::LoadLevel_1(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*>& checkpoints)
+void LevelManager::LoadFirstLevel(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*> checkpoints, TileMap& map)
 {
-    m_Level = 1;
-    return LoadLevel(player, companion, enemies, checkpoints, Level_1::Level_1_Tileset, Level_1::Level_1_Map_1, Level_1::Level_1_Foe_Texture, true, false);
-}
-
-TileMap LevelManager::LoadLevel_2(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*>& checkpoints)
-{
-    m_Level = 2;
-    return LoadLevel(player, companion, enemies, checkpoints, Level_1::Level_1_Tileset, Level_1::Level_1_Map_2, Level_1::Level_1_Foe_Texture, false, false);
-}
-
-TileMap LevelManager::LoadLevel_3(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*>& checkpoints)
-{
-    m_Level = 3;
-    return LoadLevel(player, companion, enemies, checkpoints, Level_1::Level_1_Tileset, Level_1::Level_1_Map_3, Level_1::Level_1_Foe_Texture, false, false);
-}
-
-void LevelManager::Update()
-{
+    if (m_Level_1.GetStep() == 0)
+    {
+        map = m_Level_1.LoadLevel_1(player, companion, enemies, checkpoints);
+    }
+    if (m_Level_1.GetStep() == 1 && player.m_SteppedOnCheckPoint)
+    {
+        player.m_SteppedOnCheckPoint = false;
+        map = m_Level_1.LoadLevel_2(player, companion, enemies, checkpoints);
+    }
+    else if (m_Level_1.GetStep() == 2 && player.m_HasDiedOnce)
+    {
+        map = m_Level_1.LoadLevel_3(player, companion, enemies, checkpoints);
+    }
+    else if (m_Level_1.GetStep() == 3 && player.m_SteppedOnCheckPoint && companion.IsAttached() /*&& m_Enemies.empty()*/)
+    {
+        player.m_SteppedOnCheckPoint = false;
+        m_EndGame = true;
+    }
 }
