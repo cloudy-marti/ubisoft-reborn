@@ -109,10 +109,5 @@ void TileMap::addCollideableObject(float xCenterPos, float yCenterPos, float wid
 {
     CollideableObject* w = new CollideableObject{ xCenterPos, yCenterPos, width, height };
     // useful for debug
-    //m_Walls.push_back(w);
-}
-
-void TileMap::addTriggerableObject(sf::Vector2f center, float width, float height)
-{
-    // TODO
+    m_Walls.push_back(w);
 }
