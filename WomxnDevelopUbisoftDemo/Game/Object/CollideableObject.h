@@ -2,7 +2,7 @@
 
 #include <Engine/Physics/BoxCollideable.h>
 
-class CollideableObject : public sf::Drawable//, public BoxCollideable
+class CollideableObject : public sf::Drawable
 {
 public:
 	CollideableObject(float xCenterPos, float yCenterPos, float width, float height);

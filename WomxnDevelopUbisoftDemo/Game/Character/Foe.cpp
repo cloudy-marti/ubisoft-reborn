@@ -22,6 +22,8 @@ void Foe::onCollision(const BoxCollideable& other)
 	case BoxCollideable::Tag::WALL:
 		CollidesRigidBody();
 		break;
+	case BoxCollideable::Tag::DAMAGING_OBJECT:
+		TakeDamage(1.5f);
 	default:
 		break;
 	}

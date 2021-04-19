@@ -12,9 +12,9 @@ public:
         PLAYER,
         COMPANION,
         ENEMY,
-        LEVEL_TRIGGER,
         CHECKPOINT,
         WALL,
+        DAMAGING_OBJECT,
         HOLE
     };
 
@@ -36,6 +36,11 @@ public:
         , m_OnCollisionFunc{ other.m_OnCollisionFunc }
     {
         PhysicsEngine::GetInstance()->RegisterCollider(this);
+    }
+
+    ~BoxCollideable()
+    {
+        PhysicsEngine::GetInstance()->DeleteCollider(this);
     }
 
     template<class T>
@@ -63,7 +68,6 @@ public:
     {
         return sf::Vector2f(m_BoundingBox.left + (m_BoundingBox.width / 2.0f), m_BoundingBox.top + (m_BoundingBox.height / 2.0f));
     }
-
 
     inline const Tag getTag() const { return m_Tag; }
     inline void setTag(Tag tag) { m_Tag = tag; }

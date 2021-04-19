@@ -7,6 +7,7 @@ class PhysicsEngine : public Manager
 public:
 	static PhysicsEngine* GetInstance();
 	void RegisterCollider(BoxCollideable*);
+	void DeleteCollider(BoxCollideable*);
 
 	void Update() override;
 
@@ -14,6 +15,5 @@ public:
 private:
 	PhysicsEngine();
 	static PhysicsEngine* _Instance;
-
 };
 

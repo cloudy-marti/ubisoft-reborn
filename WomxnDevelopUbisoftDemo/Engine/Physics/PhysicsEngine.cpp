@@ -19,6 +19,11 @@ void PhysicsEngine::RegisterCollider(BoxCollideable* bBox)
     m_Colliders.push_back(bBox);
 }
 
+void PhysicsEngine::DeleteCollider(BoxCollideable* bbox)
+{
+    m_Colliders.erase(std::find(m_Colliders.begin(), m_Colliders.end(), bbox));
+}
+
 void PhysicsEngine::Update()
 {
     for (BoxCollideable* bbox : m_Colliders)

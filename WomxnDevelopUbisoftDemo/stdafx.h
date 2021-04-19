@@ -24,6 +24,7 @@
 
 #include <Game/Object/CollideableObject.h>
 #include <Game/Object/Checkpoint.h>
+#include <Game/Object/Collectible.h>
 
 #include <Game/Character/Character.h>
 #include <Game/Character/MainCharacter.h>

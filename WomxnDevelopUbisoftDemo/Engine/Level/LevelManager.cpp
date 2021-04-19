@@ -43,6 +43,11 @@ void LevelManager::LoadFirstLevel(MainCharacter& player, Companion& companion, s
     else if (m_Level_1.GetStep() == 3 && player.m_SteppedOnCheckPoint && companion.IsAttached() /*&& m_Enemies.empty()*/)
     {
         player.m_SteppedOnCheckPoint = false;
+        m_Level_1.FinishLevel();
+    }
+
+    if (m_Level_1.IsFinished())
+    {
         m_EndGame = true;
     }
 }

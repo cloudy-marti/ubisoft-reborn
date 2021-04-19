@@ -3,6 +3,7 @@
 #include <string>
 
 #include <Engine/Physics/BoxCollideable.h>
+#include <Game/Object/Collectible.h>
 
 #include <iostream>
 class Character : public sf::Drawable
@@ -48,6 +49,7 @@ protected:
 
 	sf::Vector2f m_Position;
 	sf::Vector2f m_OldPosition;
+	sf::Vector2f m_LastVelocity{ m_Velocity };
 	sf::Vector2f m_Velocity;
 
 	sf::Vector2f m_LastCheckPoint;
@@ -62,4 +64,6 @@ protected:
 	bool  m_OnCoolDown;
 
 	BoxCollideable m_BoundingBox;
+
+	std::vector<Collectible*> m_InstanciatedObjects;
 };

@@ -32,6 +32,7 @@ private:
 		static const std::vector<std::string> Level_1_Map_3;
 
 		int m_Event = 0;
+		bool m_EndOfLevel = false;
 
 	public:
 		TileMap LoadLevel_1(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&);
@@ -39,6 +40,9 @@ private:
 		TileMap LoadLevel_3(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&);
 		
 		inline int GetStep() const { return m_Event; };
+
+		void FinishLevel() { m_EndOfLevel = true; }
+		bool IsFinished() const { return m_EndOfLevel; };
 	};
 
 	LevelManager();

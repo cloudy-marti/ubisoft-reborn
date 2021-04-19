@@ -5,7 +5,6 @@ Companion::Companion(Character& leader, const std::string& filePath)
 				, leader, 300.f, 50.f }
 {
 	InputManager* inputManager = InputManager::GetInstance();
-	inputManager->BindKey(sf::Keyboard::Space, sf::Keyboard::Space, sf::Keyboard::Space, *this, &Companion::PetTheCompanion);
 	inputManager->BindKey(sf::Keyboard::A, sf::Keyboard::Q, sf::Keyboard::A, *this, &Companion::HealLeader);
 
 	m_BoundingBox.BindOnCollisionFunc(*this, &Companion::onCollision);
@@ -15,14 +14,6 @@ Companion::Companion(Character& leader, const std::string& filePath)
 
 	m_MlemSoundBuffer.loadFromFile("Assets\\sound\\mlem.wav");
 	m_MlemSound.setBuffer(m_MlemSoundBuffer);
-}
-
-void Companion::PetTheCompanion()
-{
-	if (IsCloseToLeader())
-	{
-		m_WoofSound.play();
-	}
 }
 
 void Companion::HealLeader()

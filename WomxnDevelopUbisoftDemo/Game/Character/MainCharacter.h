@@ -4,33 +4,35 @@
 
 class MainCharacter : public Character
 {
+
 public:	
 	MainCharacter(const std::string&);
 	void Update(float) override;
-	//void StartEndGame();
 
 	inline bool IsCollidingWall() const { return m_isCollidingRigidBody; }
-	inline bool IsCameraSafe() const { return m_CameraSafe; }
+	inline bool IsCameraSafe() const { return m_CameraSafe && !m_isCollidingRigidBody; }
 
 	void onCollision(const BoxCollideable&) override;
 	void Die() override;
-
-	//inline bool StillHasToDie() const { return m_YetToDie; }
 
 	bool m_HasDiedOnce = false;
 	bool m_SteppedOnCheckPoint = false;
 
 	inline bool HasSword() const { return m_HasSword; }
+	void AttackWithSword();
+
+	void TakeDamage(float) override;
 
 private:
-	void BindDirectionKeys();
+	void BindActionKeys();
 
 	bool m_HasSword = false;
 
 	bool m_CameraSafe;
 	bool m_IsPlayingEndGame;
 
-private:
+	bool m_IsTakingDamage = false;
+	float m_DamageTime = 0.2f;
 
 // Private member-functions that are binded to InputManager
 private:

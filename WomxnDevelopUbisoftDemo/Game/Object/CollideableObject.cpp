@@ -30,7 +30,9 @@ CollideableObject::CollideableObject(const CollideableObject& other)
 {}
 
 CollideableObject::~CollideableObject()
-{}
+{
+	delete &m_BoundingBox;
+}
 
 void CollideableObject::Update(float deltaTime)
 {

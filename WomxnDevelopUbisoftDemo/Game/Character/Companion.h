@@ -7,7 +7,7 @@ class Companion : public Follower
 public:
 	Companion(Character&, const std::string&);
 
-	void PetTheCompanion();
+	//void PetTheCompanion();
 	void HealLeader();
 
 	void Die() override;

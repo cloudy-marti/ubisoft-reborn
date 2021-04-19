@@ -30,7 +30,6 @@ void GameReborn::Update(float deltaTime)
 {
     m_InputManager->Update();
     m_PhysicsManager->Update();
-    m_LevelManager->Update();
 
     // update characters position
     m_MainCharacter.Update(deltaTime);
@@ -82,11 +81,11 @@ void GameReborn::Render(sf::RenderTarget& target)
         target.draw(*enemy);
     }
 
-    // for debug only
-    //for (auto wall : m_Map.getWalls())
-    //{
-    //    target.draw(*wall);
-    //}
+     //for debug only
+    for (auto wall : m_Map.getWalls())
+    {
+        target.draw(*wall);
+    }
 
     if (m_IsFinished)
     {

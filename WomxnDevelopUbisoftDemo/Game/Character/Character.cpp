@@ -28,6 +28,10 @@ Character::Character(sf::Vector2f position, float max_speed, float hp, float max
 void Character::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_Sprite);
+    for (auto object : m_InstanciatedObjects)
+    {
+        object->draw(target, states);
+    }
 }
 
 void Character::CollidesRigidBody()

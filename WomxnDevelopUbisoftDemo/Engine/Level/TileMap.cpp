@@ -44,7 +44,7 @@ bool TileMap::load(const std::string& tileset, sf::Vector2f tileSize, const std:
 }
 
 /**
- * : -> No collision (should be the contrary)
+ * : -> Collision
  * p -> Player
  * c -> Companion
  * f -> Enemy
