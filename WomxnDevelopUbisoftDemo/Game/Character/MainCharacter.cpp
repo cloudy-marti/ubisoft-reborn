@@ -8,7 +8,7 @@ MainCharacter::MainCharacter(const std::string& filePath)
     , m_CameraSafe          { false }
 {
     BindActionKeys();
-    m_BoundingBox.BindOnCollisionFunc(*this, &MainCharacter::onCollision);
+    m_BoundingBox->BindOnCollisionFunc(*this, &MainCharacter::onCollision);
 }
 
 void MainCharacter::AttackWithSword()
@@ -16,7 +16,7 @@ void MainCharacter::AttackWithSword()
     if (m_HasSword && !m_OnCoolDown)
     {
         sf::Vector2f position = { m_Position.x + ((m_LastVelocity.x / m_MaxSpeed) * 45.f), m_Position.y };
-        m_InstanciatedObjects.emplace_back(new Collectible { position, {0.f, 0.f}, ".\\Assets\\object\\slash.png", 0.3f, BoxCollideable::Tag::DAMAGING_OBJECT });
+        m_InstanciatedObjects.emplace_back(new Collectible{ position, {0.f, 0.f}, ".\\Assets\\object\\slash.png", 0.3f, BoxCollideable::Tag::DAMAGING_OBJECT });
         m_OnCoolDown = true;
     }
 }
@@ -47,7 +47,7 @@ void MainCharacter::Update(float deltaTime)
     m_Velocity.x *= SLOWDOWN_RATE;
     m_Velocity.y *= SLOWDOWN_RATE;
 
-    for (auto object : m_InstanciatedObjects)
+    for (auto& object : m_InstanciatedObjects)
     {
         object->Update(deltaTime);
     }
@@ -86,7 +86,7 @@ void MainCharacter::Update(float deltaTime)
     }
 
     m_Sprite.setPosition(m_Position);
-    m_BoundingBox.SetCenter(m_Position);
+    m_BoundingBox->SetCenter(m_Position);
     if (m_Velocity.x != 0.f)
     {
         m_LastVelocity = m_Velocity;
@@ -94,7 +94,7 @@ void MainCharacter::Update(float deltaTime)
     m_Velocity = { 0.f, 0.f };
 
     m_InstanciatedObjects.erase(std::remove_if(m_InstanciatedObjects.begin(), m_InstanciatedObjects.end(),
-        [](Collectible* object) { return object->HasToDisappear(); }), m_InstanciatedObjects.end());
+        [](std::unique_ptr<Collectible>& object) { return object->HasToDisappear(); }), m_InstanciatedObjects.end());
 }
 
 void MainCharacter::onCollision(const BoxCollideable& other)

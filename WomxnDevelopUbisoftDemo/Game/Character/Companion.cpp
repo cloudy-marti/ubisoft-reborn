@@ -7,7 +7,7 @@ Companion::Companion(Character& leader, const std::string& filePath)
 	InputManager* inputManager = InputManager::GetInstance();
 	inputManager->BindKey(sf::Keyboard::A, sf::Keyboard::Q, sf::Keyboard::A, *this, &Companion::HealLeader);
 
-	m_BoundingBox.BindOnCollisionFunc(*this, &Companion::onCollision);
+	m_BoundingBox->BindOnCollisionFunc(*this, &Companion::onCollision);
 
 	m_WoofSoundBuffer.loadFromFile("Assets\\sound\\wowo.wav");
 	m_WoofSound.setBuffer(m_WoofSoundBuffer);

@@ -17,8 +17,10 @@ LevelManager* LevelManager::GetInstance()
 [[nodiscard]] TileMap LevelManager::LoadLevel(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*>& checkpoints,
     const std::string& tileset, const std::vector<std::string>& tilemap, const std::string& texturePath, bool start, bool end)
 {
-    std::vector<BoxCollideable*>& colliders = PhysicsEngine::GetInstance()->m_Colliders;
-    colliders.erase(std::remove_if(colliders.begin(), colliders.end(), [](BoxCollideable* bbox) { return bbox->getTag() == BoxCollideable::Tag::WALL || bbox->getTag() == BoxCollideable::Tag::CHECKPOINT; }), colliders.end());
+    std::vector<std::unique_ptr<BoxCollideable>>& colliders = PhysicsEngine::GetInstance()->m_Colliders;
+    colliders.erase(std::remove_if(colliders.begin(), colliders.end(),
+        [](std::unique_ptr<BoxCollideable>& bbox) { return bbox->getTag() == BoxCollideable::Tag::WALL || bbox->getTag() == BoxCollideable::Tag::CHECKPOINT; }),
+        colliders.end());
 
     Level* map_1 = new Level { player, companion, enemies, checkpoints, tileset, 32.f, tilemap, 36, 36, start, end};
     map_1->SetEnemiesTexture(texturePath, enemies);

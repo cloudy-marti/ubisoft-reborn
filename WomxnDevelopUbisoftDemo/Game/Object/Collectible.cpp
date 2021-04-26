@@ -1,6 +1,11 @@
 #include "stdafx.h"
 #include "Collectible.h"
 
+void Collectible::draw(sf::RenderTarget& target, sf::RenderStates) const
+{
+	target.draw(m_Sprite);
+}
+
 Collectible::Collectible(sf::Vector2f position, sf::Vector2f velocity, const std::string& filePath, float timeToLive, BoxCollideable::Tag tag)
 	: m_Position { position }
 	, m_Velocity { velocity }
@@ -14,14 +19,9 @@ Collectible::Collectible(sf::Vector2f position, sf::Vector2f velocity, const std
 	m_Sprite.setPosition(m_Position);
 	m_Sprite.setScale({ 1.f, 1.f });
 
-	m_BoundingBox.setTag(tag);
-	m_BoundingBox.SetBoundingBox(m_Position, textureSize * 1.f);
-	m_BoundingBox.BindOnCollisionFunc(*this, &Collectible::onCollision);
-}
-
-void Collectible::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	target.draw(m_Sprite);
+	m_BoundingBox->setTag(tag);
+	m_BoundingBox->SetBoundingBox(m_Position, textureSize * 1.f);
+	m_BoundingBox->BindOnCollisionFunc(*this, &Collectible::onCollision);
 }
 
 void Collectible::Update(float deltaTime)
@@ -34,5 +34,5 @@ void Collectible::Update(float deltaTime)
 
 	m_Position += m_Velocity;
 	m_Sprite.setPosition(m_Position);
-	m_BoundingBox.SetCenter(m_Position);
+	m_BoundingBox->SetCenter(m_Position);
 }

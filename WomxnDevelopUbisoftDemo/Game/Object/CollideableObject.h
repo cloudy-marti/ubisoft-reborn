@@ -6,7 +6,7 @@ class CollideableObject : public sf::Drawable
 {
 public:
 	CollideableObject(float xCenterPos, float yCenterPos, float width, float height);
-	CollideableObject(const CollideableObject& other);
+	CollideableObject(const CollideableObject& other) = delete;
 	~CollideableObject();
 
 	void Update(float deltaTime);
@@ -21,6 +21,6 @@ private:
 	float m_gColor;
 	float m_bColor;
 
-	BoxCollideable m_BoundingBox;
+	BoxCollideable* m_BoundingBox = new BoxCollideable;
 };
 

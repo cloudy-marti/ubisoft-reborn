@@ -86,8 +86,8 @@ int TileMap::ProcessMapTileAndGetTileNumber(const std::vector<std::string>& tile
         }
         case 'x':
         {
-            Checkpoint* c = new Checkpoint{ position.x, position.y, tileSize.x, tileSize.y };
-            checkpoints.push_back(c);
+            Checkpoint* checkpoint = new Checkpoint{ position.x, position.y, tileSize.x, tileSize.y };
+            checkpoints.push_back(checkpoint);
             break;
         }
         default:

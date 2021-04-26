@@ -7,11 +7,10 @@ class PhysicsEngine : public Manager
 public:
 	static PhysicsEngine* GetInstance();
 	void RegisterCollider(BoxCollideable*);
-	void DeleteCollider(BoxCollideable*);
 
 	void Update() override;
 
-	std::vector<BoxCollideable*> m_Colliders;
+	std::vector<std::unique_ptr<BoxCollideable>> m_Colliders;
 private:
 	PhysicsEngine();
 	static PhysicsEngine* _Instance;

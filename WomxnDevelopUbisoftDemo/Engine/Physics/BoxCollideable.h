@@ -15,7 +15,8 @@ public:
         CHECKPOINT,
         WALL,
         DAMAGING_OBJECT,
-        HOLE
+        HOLE,
+        OUT_OF_SIM
     };
 
 public:
@@ -25,23 +26,9 @@ public:
         PhysicsEngine::GetInstance()->RegisterCollider(this);
     }
 
-    BoxCollideable(Tag tag)
-        : m_Tag{ tag }
-    {
-        PhysicsEngine::GetInstance()->RegisterCollider(this);
-    }
-
-    BoxCollideable(const BoxCollideable& other)
-        : m_Tag{ other.m_Tag }
-        , m_OnCollisionFunc{ other.m_OnCollisionFunc }
-    {
-        PhysicsEngine::GetInstance()->RegisterCollider(this);
-    }
-
-    ~BoxCollideable()
-    {
-        PhysicsEngine::GetInstance()->DeleteCollider(this);
-    }
+    BoxCollideable(const BoxCollideable& other) = delete;
+    BoxCollideable& operator=(const BoxCollideable&) = delete;
+    ~BoxCollideable() = default;
 
     template<class T>
     inline void BindOnCollisionFunc(T& instance, onCollisionCallback<T> callBack)

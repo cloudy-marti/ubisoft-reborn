@@ -6,13 +6,13 @@ Checkpoint::Checkpoint(float xCenterPos, float yCenterPos, float width, float he
 	, m_rColor{ 0.0f }
 	, m_gColor{ 1.0f }
 	, m_bColor{ 1.0f }
-	, m_BoundingBox { BoxCollideable::Tag::CHECKPOINT }
 {
 	const auto center = sf::Vector2f(xCenterPos, yCenterPos);
 	const auto size = sf::Vector2f(width, height);
 
-	m_BoundingBox.SetBoundingBox(center, size);
-	m_BoundingBox.BindOnCollisionFunc(*this, &Checkpoint::onCollision);
+	m_BoundingBox->SetBoundingBox(center, size);
+	m_BoundingBox->setTag(BoxCollideable::Tag::CHECKPOINT);
+	m_BoundingBox->BindOnCollisionFunc(*this, &Checkpoint::onCollision);
 
 	m_Rectangle.setSize(size);
 	m_Rectangle.setOrigin(size * 0.5f);
@@ -25,6 +25,7 @@ Checkpoint::Checkpoint(float xCenterPos, float yCenterPos, float width, float he
 
 Checkpoint::~Checkpoint()
 {
+	m_BoundingBox->setTag(BoxCollideable::Tag::OUT_OF_SIM);
 }
 
 void Checkpoint::Update(float deltaTime)
@@ -42,7 +43,7 @@ void Checkpoint::Update(float deltaTime)
 	m_Rectangle.setOutlineColor(sf::Color{ static_cast<uint8_t>(m_rColor * 255.0f), static_cast<uint8_t>(m_gColor * 255.0f), static_cast<uint8_t>(m_bColor * 255.0f) });
 }
 
-void Checkpoint::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Checkpoint::draw(sf::RenderTarget& target, sf::RenderStates) const
 {
 	target.draw(m_Rectangle);
 }
@@ -69,7 +70,7 @@ void Checkpoint::onCollision(const BoxCollideable& other)
 	{
 	case BoxCollideable::Tag::PLAYER:
 	{
-		if (m_BoundingBox.Contains(other))
+		if (m_BoundingBox->Contains(other))
 		{
 			StartEndGame();
 			/*

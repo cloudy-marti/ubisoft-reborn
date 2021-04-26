@@ -17,7 +17,7 @@ public:
 	virtual void onCollision(const BoxCollideable&) = 0;
 	virtual void CollidesRigidBody();
 
-	inline sf::Vector2f GetCenter() const { return m_BoundingBox.GetCenter(); }
+	inline sf::Vector2f GetCenter() const { return m_BoundingBox->GetCenter(); }
 
 	inline const float GetHP() const { return m_HealthPoints; }
 	inline void Heal(float hp) { m_HealthPoints = m_HealthPoints + hp <= m_MaxHealthPoints ? m_HealthPoints + hp : m_MaxHealthPoints; }
@@ -37,6 +37,12 @@ public:
 
 protected:
 	Character(sf::Vector2f position, float max_speed, float hp, float max_hp, float cooldown, const std::string& filePath, BoxCollideable::Tag tag);
+
+	Character(const Character&) = delete;
+	Character& operator=(const Character&)
+	{
+		m_BoundingBox->setTag(BoxCollideable::Tag::OUT_OF_SIM);
+	}
 
 	// Private constants
 	const float m_MaxSpeed;
@@ -63,7 +69,7 @@ protected:
 	float m_CurrentCoolDown;
 	bool  m_OnCoolDown;
 
-	BoxCollideable m_BoundingBox;
+	BoxCollideable* m_BoundingBox = new BoxCollideable;
 
-	std::vector<Collectible*> m_InstanciatedObjects;
+	std::vector<std::unique_ptr<Collectible>> m_InstanciatedObjects;
 };

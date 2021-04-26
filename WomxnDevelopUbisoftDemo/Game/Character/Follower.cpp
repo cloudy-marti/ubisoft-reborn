@@ -58,7 +58,7 @@ void Follower::Update(float deltaTime)
 	}
 
 	m_Sprite.setPosition(m_Position);
-	m_BoundingBox.SetCenter(m_Position);
+	m_BoundingBox->SetCenter(m_Position);
 	m_Velocity = { 0.f, 0.f };
 }
 

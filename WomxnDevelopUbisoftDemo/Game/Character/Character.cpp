@@ -21,14 +21,14 @@ Character::Character(sf::Vector2f position, float max_speed, float hp, float max
     m_Sprite.setPosition(m_Position);
     m_Sprite.setScale({ .5f, .5f });
 
-    m_BoundingBox.setTag(tag);
-    m_BoundingBox.SetBoundingBox(m_Position, textureSize * .5f);
+    m_BoundingBox->setTag(tag);
+    m_BoundingBox->SetBoundingBox(m_Position, textureSize * .5f);
 }
 
 void Character::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_Sprite);
-    for (auto object : m_InstanciatedObjects)
+    for (auto& object : m_InstanciatedObjects)
     {
         object->draw(target, states);
     }
@@ -52,7 +52,7 @@ void Character::setPosition(sf::Vector2f position)
 {
     m_Position = position;
     m_Sprite.setPosition(m_Position);
-    m_BoundingBox.SetCenter(m_Position);
+    m_BoundingBox->SetCenter(m_Position);
 }
 void Character::SetTexture(const std::string& path)
 {

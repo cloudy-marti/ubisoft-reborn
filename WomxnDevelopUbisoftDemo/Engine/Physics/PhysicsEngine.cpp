@@ -16,19 +16,17 @@ PhysicsEngine* PhysicsEngine::GetInstance()
 
 void PhysicsEngine::RegisterCollider(BoxCollideable* bBox)
 {
-    m_Colliders.push_back(bBox);
-}
-
-void PhysicsEngine::DeleteCollider(BoxCollideable* bbox)
-{
-    m_Colliders.erase(std::find(m_Colliders.begin(), m_Colliders.end(), bbox));
+    m_Colliders.emplace_back(bBox);
 }
 
 void PhysicsEngine::Update()
 {
-    for (BoxCollideable* bbox : m_Colliders)
+    m_Colliders.erase(std::remove_if(m_Colliders.begin(), m_Colliders.end(), [](std::unique_ptr<BoxCollideable>& bbox) { return bbox->getTag() == BoxCollideable::Tag::OUT_OF_SIM; }),
+        m_Colliders.end());
+
+    for (auto& bbox : m_Colliders)
     {
-        for (BoxCollideable* bbox1 : m_Colliders)
+        for (auto& bbox1 : m_Colliders)
         {
             // this is the most common use case
             if (bbox->getTag() == BoxCollideable::Tag::WALL

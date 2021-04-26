@@ -7,6 +7,11 @@ class MainCharacter : public Character
 
 public:	
 	MainCharacter(const std::string&);
+	MainCharacter(const MainCharacter&) = delete;
+	MainCharacter& operator=(const MainCharacter&) = delete;
+
+	~MainCharacter() = default;
+
 	void Update(float) override;
 
 	inline bool IsCollidingWall() const { return m_isCollidingRigidBody; }

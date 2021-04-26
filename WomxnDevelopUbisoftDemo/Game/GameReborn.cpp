@@ -29,11 +29,12 @@ GameReborn::~GameReborn()
 void GameReborn::Update(float deltaTime)
 {
     m_InputManager->Update();
-    m_PhysicsManager->Update();
 
     // update characters position
     m_MainCharacter.Update(deltaTime);
     m_Companion.Update(deltaTime);
+
+    m_PhysicsManager->Update();
 
     for (Foe* enemy : m_Enemies)
     {
@@ -93,7 +94,7 @@ void GameReborn::Render(sf::RenderTarget& target)
     }
 }
 
-void GameReborn::RenderDebugMenu(sf::RenderTarget& target)
+void GameReborn::RenderDebugMenu(sf::RenderTarget&)
 {
     ImGui::Begin("Debug Menu");
     ImGui::Text("Press F1 to close this debug menu");
@@ -142,7 +143,7 @@ void GameReborn::RenderDebugMenu(sf::RenderTarget& target)
     {
         const auto& cameraCenterPos = m_MainCamera.getCenter();
         const auto& windowViewCenterPos = m_Window.getView().getCenter();
-        const auto& windowDefaultViewCenterPos = m_Window.getDefaultView().getCenter();
+        //const auto& windowDefaultViewCenterPos = m_Window.getDefaultView().getCenter();
 
         ImGui::Text("Camera");
         ImGui::Text("X: %f", cameraCenterPos.x);

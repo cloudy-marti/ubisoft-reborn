@@ -23,5 +23,5 @@ private:
 
 	bool m_IsPlayingEndGame;
 
-	BoxCollideable m_BoundingBox;
+	BoxCollideable* m_BoundingBox = new BoxCollideable;
 };
