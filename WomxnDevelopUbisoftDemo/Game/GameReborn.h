@@ -31,5 +31,5 @@ private:
 
     Camera m_MainCamera;
 
-    bool m_IsFinished;
+    bool m_IsFinished = false;
 };

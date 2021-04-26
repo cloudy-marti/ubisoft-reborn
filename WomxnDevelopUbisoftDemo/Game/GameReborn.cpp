@@ -5,7 +5,6 @@ GameReborn::GameReborn()
     , m_MainCharacter{ ".\\Assets\\character\\issoucrusade.bmp" }
     , m_Companion{ m_MainCharacter, ".\\Assets\\character\\pup.bmp" }
     , m_MainCamera{ m_Window.getDefaultView() }
-    , m_IsFinished{ false }
 {
     m_EndgameTextFont.loadFromFile("Assets\\arial.ttf");
 
@@ -28,6 +27,11 @@ GameReborn::~GameReborn()
 
 void GameReborn::Update(float deltaTime)
 {
+    if (m_OnPause)
+    {
+        return;
+    }
+
     m_InputManager->Update();
 
     // update characters position
@@ -156,6 +160,8 @@ void GameReborn::RenderDebugMenu(sf::RenderTarget&)
 
     if (ImGui::CollapsingHeader("Game status"))
     {
+        ImGui::Text("Game Paused: %s", m_OnPause? "yes" : "no");
+
         ImGui::Text("Level: %d", m_LevelManager->m_Level);
         
         if (m_IsFinished)

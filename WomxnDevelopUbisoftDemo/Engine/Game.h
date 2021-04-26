@@ -24,5 +24,7 @@ protected:
     PhysicsEngine*  m_PhysicsManager;
     LevelManager*   m_LevelManager;
 
+    bool m_OnPause = false;
+
 private:
 };

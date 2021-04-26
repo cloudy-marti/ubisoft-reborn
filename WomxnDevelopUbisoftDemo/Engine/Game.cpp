@@ -56,6 +56,10 @@ void Game::RunGameLoop()
                     {
                         m_InputManager->ToggleKeyboardLayout();
                     }
+                    else if (event.key.code == sf::Keyboard::P)
+                    {
+                        m_OnPause = !m_OnPause;
+                    }
                     break;
                 }
                 case sf::Event::Resized:
