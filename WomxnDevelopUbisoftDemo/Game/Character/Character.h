@@ -39,7 +39,9 @@ protected:
 	Character(sf::Vector2f position, float max_speed, float hp, float max_hp, float cooldown, const std::string& filePath, BoxCollideable::Tag tag);
 
 	Character(const Character&) = delete;
-	Character& operator=(const Character&)
+	Character& operator=(const Character&) = delete;
+
+	~Character()
 	{
 		m_BoundingBox->setTag(BoxCollideable::Tag::OUT_OF_SIM);
 	}

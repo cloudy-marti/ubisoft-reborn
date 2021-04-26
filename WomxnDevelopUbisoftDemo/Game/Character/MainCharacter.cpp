@@ -3,7 +3,7 @@
 using namespace sf;
 
 MainCharacter::MainCharacter(const std::string& filePath)
-    : Character{ { 400.f, 400.f }, 135.f, 3.f, 7.f, 1.5f, filePath, BoxCollideable::Tag::PLAYER }
+    : Character{ { 400.f, 400.f }, 135.f, 3.f, 7.f, 0.2f, filePath, BoxCollideable::Tag::PLAYER }
     , m_IsPlayingEndGame    { false }
     , m_CameraSafe          { false }
 {
@@ -16,7 +16,7 @@ void MainCharacter::AttackWithSword()
     if (m_HasSword && !m_OnCoolDown)
     {
         sf::Vector2f position = { m_Position.x + ((m_LastVelocity.x / m_MaxSpeed) * 45.f), m_Position.y };
-        m_InstanciatedObjects.emplace_back(new Collectible{ position, {0.f, 0.f}, ".\\Assets\\object\\slash.png", 0.3f, BoxCollideable::Tag::DAMAGING_OBJECT });
+        m_InstanciatedObjects.emplace_back(new Collectible{ position, {0.f, 0.f}, ".\\Assets\\object\\slash.png", 0.2f, BoxCollideable::Tag::DAMAGING_OBJECT });
         m_OnCoolDown = true;
     }
 }
@@ -60,6 +60,7 @@ void MainCharacter::Update(float deltaTime)
             m_CurrentCoolDown = m_CoolDown;
             m_OnCoolDown = false;
         }
+        return;
     }
 
     if (m_IsTakingDamage)

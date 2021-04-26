@@ -147,7 +147,6 @@ void GameReborn::RenderDebugMenu(sf::RenderTarget&)
     {
         const auto& cameraCenterPos = m_MainCamera.getCenter();
         const auto& windowViewCenterPos = m_Window.getView().getCenter();
-        //const auto& windowDefaultViewCenterPos = m_Window.getDefaultView().getCenter();
 
         ImGui::Text("Camera");
         ImGui::Text("X: %f", cameraCenterPos.x);
