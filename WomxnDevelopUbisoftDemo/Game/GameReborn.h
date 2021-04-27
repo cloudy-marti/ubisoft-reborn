@@ -12,9 +12,9 @@ public:
 
     void Render(sf::RenderTarget& target) override;
     void RenderDebugMenu(sf::RenderTarget& target) override;
+    void RenderDialogueBox(sf::RenderTarget&, const std::string&, const std::string&) override;
 
 private:
-
     sf::Font m_EndgameTextFont;
     sf::Text m_EndgameText;
 

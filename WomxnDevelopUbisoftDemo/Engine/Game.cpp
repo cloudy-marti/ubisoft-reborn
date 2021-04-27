@@ -75,6 +75,7 @@ void Game::RunGameLoop()
         Update(deltaTime);
         Render(m_Window);
         RenderDebugMenu(m_Window);
+        RenderDialogueBox(m_Window, "hello", "hi");
 
         ImGui::EndFrame();
         if (toggleImGui)

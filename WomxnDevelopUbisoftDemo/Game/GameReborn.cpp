@@ -98,7 +98,7 @@ void GameReborn::Render(sf::RenderTarget& target)
     }
 }
 
-void GameReborn::RenderDebugMenu(sf::RenderTarget&)
+void GameReborn::RenderDebugMenu(sf::RenderTarget& target)
 {
     ImGui::Begin("Debug Menu");
     ImGui::Text("Press F1 to close this debug menu");
@@ -173,5 +173,25 @@ void GameReborn::RenderDebugMenu(sf::RenderTarget&)
         }
     }
 
+    if (ImGui::Button("bla"))
+    {
+        m_ToggleDialogue = !m_ToggleDialogue;
+    }
+
+    ImGui::End();
+}
+
+void GameReborn::RenderDialogueBox(sf::RenderTarget&, const std::string& title, const std::string& text)
+{
+    if (!m_ToggleDialogue)
+    {
+        UnpauseGame();
+        return;
+    }
+    PauseGame();
+    ImGui::SetNextWindowSize({1024, 200});
+    ImGui::SetNextWindowPos({ 0, 560 });
+    ImGui::Begin(title.c_str(), &m_ToggleDialogue, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoMove);
+    ImGui::Text(text.c_str());
     ImGui::End();
 }

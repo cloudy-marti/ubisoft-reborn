@@ -14,7 +14,6 @@ int main()
     if (music.openFromFile("Assets/sound/pallet_town.wav"))
     {
         music.setVolume(5.f);
-        //music.setLoop(true);
         music.play();
     }
     game.RunGameLoop();

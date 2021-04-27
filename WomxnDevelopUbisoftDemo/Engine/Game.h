@@ -16,7 +16,13 @@ protected:
     virtual void Update(float deltaTime) = 0;
     virtual void Render(sf::RenderTarget& target) = 0;
     virtual void RenderDebugMenu(sf::RenderTarget& target) = 0;
-    //virtual void PauseGame(float currentDeltaTime) = 0;
+    virtual void RenderDialogueBox(sf::RenderTarget&, const std::string&, const std::string&) = 0;
+
+    inline void PauseGame() { m_OnPause = true; }
+    inline void UnpauseGame() { m_OnPause = false; }
+    inline void TogglePause() { m_OnPause = !m_OnPause; }
+
+    bool m_ToggleDialogue = false;
 
     sf::RenderWindow m_Window;
 
