@@ -9,8 +9,6 @@
 class Character : public sf::Drawable
 {
 public:
-	virtual ~Character() {}
-
 	virtual void Update(float deltaTime) = 0;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -41,7 +39,7 @@ protected:
 	Character(const Character&) = delete;
 	Character& operator=(const Character&) = delete;
 
-	~Character()
+	virtual ~Character()
 	{
 		m_BoundingBox->setTag(BoxCollideable::Tag::OUT_OF_SIM);
 	}

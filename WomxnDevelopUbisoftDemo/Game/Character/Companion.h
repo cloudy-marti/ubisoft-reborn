@@ -7,7 +7,6 @@ class Companion : public Follower
 public:
 	Companion(Character&, const std::string&);
 
-	//void PetTheCompanion();
 	void HealLeader();
 
 	void Die() override;
@@ -16,7 +15,6 @@ public:
 	inline void ActionLeaderDetected() override { m_IsAttachedToLeader = true; }
 
 	void onCollision(const BoxCollideable&) override;
-	//void CollidesRigidBody() override;
 
 protected:
 private:
