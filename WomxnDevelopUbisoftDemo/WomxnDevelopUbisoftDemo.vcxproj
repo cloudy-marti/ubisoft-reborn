@@ -215,6 +215,7 @@ xcopy /y /d  "$(SolutionDir)external\SFML-2.5.1\bin\*.dll" "$(OutDir)"</Command>
     <ClCompile Include="Engine\Level\TileMap.cpp" />
     <ClCompile Include="Engine\Physics\BoxCollideable.cpp" />
     <ClCompile Include="Engine\Physics\PhysicsEngine.cpp" />
+    <ClCompile Include="Engine\UI\UIManager.cpp" />
     <ClCompile Include="Engine\Utils\Math.cpp" />
     <ClCompile Include="Game\Character\Character.cpp" />
     <ClCompile Include="Game\Character\Companion.cpp" />
@@ -240,8 +241,8 @@ xcopy /y /d  "$(SolutionDir)external\SFML-2.5.1\bin\*.dll" "$(OutDir)"</Command>
     <ClInclude Include="Engine\Level\TileMap.h" />
     <ClInclude Include="Engine\Manager.h" />
     <ClInclude Include="Engine\Physics\BoxCollideable.h" />
-    <ClInclude Include="Engine\Physics\PhysicObject.h" />
     <ClInclude Include="Engine\Physics\PhysicsEngine.h" />
+    <ClInclude Include="Engine\UI\UIManager.h" />
     <ClInclude Include="Engine\Utils\Math.h" />
     <ClInclude Include="Game\Character\Character.h" />
     <ClInclude Include="Game\Character\Companion.h" />

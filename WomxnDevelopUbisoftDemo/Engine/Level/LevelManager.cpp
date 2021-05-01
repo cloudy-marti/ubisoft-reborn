@@ -29,10 +29,10 @@ LevelManager* LevelManager::GetInstance()
 
 void LevelManager::Start(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*> checkpoints, TileMap& map)
 {
-    LoadFirstLevel(player, companion, enemies, checkpoints, map);
+    LoadLevels(player, companion, enemies, checkpoints, map);
 }
 
-void LevelManager::LoadFirstLevel(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*> checkpoints, TileMap& map)
+void LevelManager::LoadLevels(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*> checkpoints, TileMap& map)
 {
     if (m_Level_1.GetStep() == 0)
     {
@@ -46,8 +46,9 @@ void LevelManager::LoadFirstLevel(MainCharacter& player, Companion& companion, s
     else if (m_Level_1.GetStep() == 2 && player.m_HasDiedOnce)
     {
         map = m_Level_1.LoadLevel_3(player, companion, enemies, checkpoints);
+        player.SetTexture(".\\Assets\\character\\issoucrusade.png");
     }
-    else if (m_Level_1.GetStep() == 3 && player.m_SteppedOnCheckPoint && companion.IsAttached() /*&& m_Enemies.empty()*/)
+    else if (m_Level_1.GetStep() == 3 && player.m_SteppedOnCheckPoint && companion.IsAttached() && enemies.empty())
     {
         player.m_SteppedOnCheckPoint = false;
         m_Level_1.FinishLevel();

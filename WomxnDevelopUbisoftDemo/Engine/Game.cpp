@@ -9,11 +9,16 @@ Game::Game(const char* windowTitle)
     m_Window.setVerticalSyncEnabled(true);
     m_Window.setFramerateLimit(static_cast<uint32_t>(APP_MAX_FRAMERATE));
     m_Window.setActive();
+
     ImGui::SFML::Init(m_Window);
 
     m_InputManager = InputManager::GetInstance();
     m_PhysicsManager = PhysicsEngine::GetInstance();
     m_LevelManager = LevelManager::GetInstance();
+    m_UIManager = UIManager::GetInstance();
+
+    m_Music.openFromFile("Assets/sound/pallet_town.wav");
+    m_Music.setVolume(5.f);
 }
 
 Game::~Game()
@@ -70,13 +75,13 @@ void Game::RunGameLoop()
 
         ImGui::SFML::Update(m_Window, clock.restart());
 
-        if (!m_HasStarted)
+        if (!m_UIManager->HasClickedStart())
         {
-            RenderStartMenu(m_Window);
+            m_UIManager->RenderStartMenu();
         }
         else
         {
-            RenderDebugMenu(m_Window);
+            m_UIManager->RenderDebugMenu();
         }
 
         Update(deltaTime);

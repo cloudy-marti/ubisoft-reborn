@@ -77,6 +77,9 @@
     <ClCompile Include="Game\LevelDesign\Level_1.cpp">
       <Filter>Game\LevelDesign</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\UI\UIManager.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -146,6 +149,9 @@
     <ClInclude Include="Engine\Manager.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\UI\UIManager.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">
@@ -177,6 +183,9 @@
     </Filter>
     <Filter Include="Game\LevelDesign">
       <UniqueIdentifier>{dfcf0837-145a-4c33-8a5d-7ee135839264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI">
+      <UniqueIdentifier>{700705ca-6e4f-45ed-ad09-46e2579570b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -11,14 +11,10 @@ class LevelManager : public Manager
 public:
 	static LevelManager* GetInstance();
 
-	//TileMap LoadLevel_4(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&);
 	
 	void Start(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>, TileMap&);
-	void LoadFirstLevel(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>, TileMap&);
+	void LoadLevels(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>, TileMap&);
 
-	// TODO this is not the right way
-	bool m_ReadyForSecondMap = false;
-	bool m_ReadyForThirdMap = false;
 	bool m_EndGame = false;
 	int m_Level = 0;
 private:

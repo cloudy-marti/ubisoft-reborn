@@ -11,6 +11,7 @@
 #include <Engine/Camera.h>
 #include <Engine/Manager.h>
 #include <Engine/InputManager.h>
+#include <Engine/UI/UIManager.h>
 
 #include <Engine/Physics/BoxCollideable.h>
 #include <Engine/Physics/PhysicsEngine.h>

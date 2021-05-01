@@ -3,6 +3,7 @@
 #include <Engine/InputManager.h>
 #include <Engine/Physics/PhysicsEngine.h>
 #include <Engine/Level/LevelManager.h>
+#include <Engine/UI/UIManager.h>
 
 class Game
 {
@@ -15,21 +16,23 @@ public:
 protected:
     virtual void Update(float deltaTime) = 0;
     virtual void Render(sf::RenderTarget& target) = 0;
-    virtual void RenderStartMenu(sf::RenderTarget& target) = 0;
-    virtual void RenderDebugMenu(sf::RenderTarget& target) = 0;
-    virtual void RenderDialogueBox(sf::RenderTarget&, const std::string&, const std::string&) = 0;
+    //virtual void RenderStartMenu(sf::RenderTarget& target) = 0;
+    //virtual void RenderDebugMenu(sf::RenderTarget& target) = 0;
+    //virtual void RenderDialogueBox(sf::RenderTarget&, const std::string&, const std::string&, bool&) = 0;
 
     inline void PauseGame() { m_OnPause = true; }
     inline void UnpauseGame() { m_OnPause = false; }
     inline void TogglePause() { m_OnPause = !m_OnPause; }
 
-    bool m_ToggleDialogue = false;
+    bool m_DialogueActive = false;
 
     sf::RenderWindow m_Window;
+    sf::Music m_Music;
 
     InputManager*   m_InputManager;
     PhysicsEngine*  m_PhysicsManager;
     LevelManager*   m_LevelManager;
+    UIManager*      m_UIManager;
 
     bool m_HasStarted = false;
     bool m_IsFinished = false;
