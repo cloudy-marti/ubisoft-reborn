@@ -27,6 +27,11 @@ LevelManager* LevelManager::GetInstance()
     return map_1->GetMap();
 }
 
+void LevelManager::Start(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*> checkpoints, TileMap& map)
+{
+    LoadFirstLevel(player, companion, enemies, checkpoints, map);
+}
+
 void LevelManager::LoadFirstLevel(MainCharacter& player, Companion& companion, std::vector<Foe*>& enemies, std::vector<Checkpoint*> checkpoints, TileMap& map)
 {
     if (m_Level_1.GetStep() == 0)

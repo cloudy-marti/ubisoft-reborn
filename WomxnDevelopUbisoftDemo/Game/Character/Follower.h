@@ -9,7 +9,6 @@ public:
 	
 	virtual void Die() override = 0;
 	virtual void onCollision(const BoxCollideable&) override = 0;
-	//virtual void CollidesRigidBody() override = 0;
 
 	inline bool IsCloseToLeader() const { return m_DistanceToLeader < m_FollowDistance; }
 	inline bool DetectsLeader() const { return m_DistanceToLeader < m_DetectionDistance; }

@@ -11,6 +11,7 @@ public:
     void StartEndGame();
 
     void Render(sf::RenderTarget& target) override;
+    void RenderStartMenu(sf::RenderTarget& target) override;
     void RenderDebugMenu(sf::RenderTarget& target) override;
     void RenderDialogueBox(sf::RenderTarget&, const std::string&, const std::string&) override;
 
@@ -20,6 +21,9 @@ private:
 
     sf::SoundBuffer m_EndgameSoundBuffer;
     sf::Sound m_EndgameSound;
+
+    sf::SoundBuffer m_EarthquakeBuffer;
+    sf::Sound m_EarthquakeSound;
 
     TileMap m_Map;
 
@@ -31,5 +35,6 @@ private:
 
     Camera m_MainCamera;
 
-    bool m_IsFinished = false;
+    bool m_SoundPlaying = false;
+    bool m_SoundPlayed = false;
 };

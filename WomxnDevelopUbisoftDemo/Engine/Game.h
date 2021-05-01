@@ -15,6 +15,7 @@ public:
 protected:
     virtual void Update(float deltaTime) = 0;
     virtual void Render(sf::RenderTarget& target) = 0;
+    virtual void RenderStartMenu(sf::RenderTarget& target) = 0;
     virtual void RenderDebugMenu(sf::RenderTarget& target) = 0;
     virtual void RenderDialogueBox(sf::RenderTarget&, const std::string&, const std::string&) = 0;
 
@@ -30,7 +31,10 @@ protected:
     PhysicsEngine*  m_PhysicsManager;
     LevelManager*   m_LevelManager;
 
+    bool m_HasStarted = false;
+    bool m_IsFinished = false;
     bool m_OnPause = false;
+    bool m_ToggleHelp = true;
 
 private:
 };

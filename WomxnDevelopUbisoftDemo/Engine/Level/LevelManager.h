@@ -13,6 +13,7 @@ public:
 
 	//TileMap LoadLevel_4(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>&);
 	
+	void Start(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>, TileMap&);
 	void LoadFirstLevel(MainCharacter&, Companion&, std::vector<Foe*>&, std::vector<Checkpoint*>, TileMap&);
 
 	// TODO this is not the right way

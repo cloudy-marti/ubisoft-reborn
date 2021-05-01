@@ -26,8 +26,6 @@ void Game::RunGameLoop()
     float deltaTime{ 1.0f / APP_MAX_FRAMERATE };
     sf::Clock clock;
 
-    bool toggleImGui = true;
-
     while (m_Window.isOpen())
     {
         clock.restart();
@@ -50,7 +48,7 @@ void Game::RunGameLoop()
                     }
                     else if (event.key.code == sf::Keyboard::F1)
                     {
-                        toggleImGui = !toggleImGui;
+                        m_ToggleHelp = !m_ToggleHelp;
                     }
                     else if (event.key.code == sf::Keyboard::F3)
                     {
@@ -72,16 +70,21 @@ void Game::RunGameLoop()
 
         ImGui::SFML::Update(m_Window, clock.restart());
 
+        if (!m_HasStarted)
+        {
+            RenderStartMenu(m_Window);
+        }
+        else
+        {
+            RenderDebugMenu(m_Window);
+        }
+
         Update(deltaTime);
         Render(m_Window);
-        RenderDebugMenu(m_Window);
-        RenderDialogueBox(m_Window, "hello", "hi");
+
+        ImGui::SFML::Render(m_Window);
 
         ImGui::EndFrame();
-        if (toggleImGui)
-        {
-            ImGui::SFML::Render(m_Window);
-        }
 
         m_Window.display();
 

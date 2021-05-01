@@ -60,8 +60,3 @@ void Companion::onCollision(const BoxCollideable& other)
 		break;
 	}
 }
-
-//void Companion::CollidesRigidBody()
-//{
-//	Character::CollidesRigidBody();
-//}

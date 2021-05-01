@@ -17,9 +17,12 @@ GameReborn::GameReborn()
     m_EndgameSoundBuffer.loadFromFile("Assets\\sound\\Test.wav");
     m_EndgameSound.setBuffer(m_EndgameSoundBuffer);
 
+    m_EarthquakeBuffer.loadFromFile("Assets\\sound\\earthquakewoof.wav");
+    m_EarthquakeSound.setBuffer(m_EarthquakeBuffer);
+
     m_Window.setView(m_MainCamera.getView());
 
-    m_LevelManager->LoadFirstLevel(m_MainCharacter, m_Companion, m_Enemies, m_Checkpoints, m_Map);
+    m_LevelManager->Start(m_MainCharacter, m_Companion, m_Enemies, m_Checkpoints, m_Map);
 }
 
 GameReborn::~GameReborn()
@@ -27,7 +30,7 @@ GameReborn::~GameReborn()
 
 void GameReborn::Update(float deltaTime)
 {
-    if (m_OnPause)
+    if (!m_HasStarted || m_OnPause)
     {
         return;
     }
@@ -76,6 +79,18 @@ void GameReborn::StartEndGame()
 void GameReborn::Render(sf::RenderTarget& target)
 {
     target.clear(sf::Color(0, 0, 0));
+
+    if (!m_HasStarted)
+    {
+        return;
+    }
+    if (m_EarthquakeSound.getStatus() == sf::SoundSource::Status::Playing)
+    {
+        m_ToggleDialogue = true;
+        RenderDialogueBox(m_Window, "You", "...!!?");
+        return;
+    }
+
     target.draw(m_Map);
 
     target.draw(m_Companion);
@@ -98,14 +113,32 @@ void GameReborn::Render(sf::RenderTarget& target)
     }
 }
 
-void GameReborn::RenderDebugMenu(sf::RenderTarget& target)
+void GameReborn::RenderStartMenu(sf::RenderTarget&)
 {
-    ImGui::Begin("Debug Menu");
-    ImGui::Text("Press F1 to close this debug menu");
+    ImGui::SetNextWindowPos({ (1024/2)-50, (768/2)-50 });
+    ImGui::Begin("start", &m_HasStarted, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoTitleBar);
+    if (ImGui::Button("START GAME"))
+    {
+        m_EarthquakeSound.play();
+        m_HasStarted = !m_HasStarted;
+    }
+    ImGui::End();
+}
+
+void GameReborn::RenderDebugMenu(sf::RenderTarget&)
+{
+    ImGui::Begin("Help");
+    ImGui::Text("Press F1 to close this help menu");
     ImGui::NewLine();
 
     const auto& mainCharCenterPos = m_MainCharacter.GetCenter();
     const auto& charCenterPos = m_Companion.GetCenter();
+
+    if (!m_ToggleHelp)
+    {
+        ImGui::End();
+        return;
+    }
 
     if (ImGui::CollapsingHeader("Inputs"))
     {
@@ -173,22 +206,11 @@ void GameReborn::RenderDebugMenu(sf::RenderTarget& target)
         }
     }
 
-    if (ImGui::Button("bla"))
-    {
-        m_ToggleDialogue = !m_ToggleDialogue;
-    }
-
     ImGui::End();
 }
 
 void GameReborn::RenderDialogueBox(sf::RenderTarget&, const std::string& title, const std::string& text)
 {
-    if (!m_ToggleDialogue)
-    {
-        UnpauseGame();
-        return;
-    }
-    PauseGame();
     ImGui::SetNextWindowSize({1024, 200});
     ImGui::SetNextWindowPos({ 0, 560 });
     ImGui::Begin(title.c_str(), &m_ToggleDialogue, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoMove);

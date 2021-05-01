@@ -5,7 +5,6 @@ class Foe : public Follower
 public:
 	Foe(sf::Vector2f position, Character& leader, const std::string& filePath);
 
-	//void Update(float deltaTime) override;
 	void onCollision(const BoxCollideable&) override;
 	void Die() override;
 
